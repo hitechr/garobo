@@ -1,2 +1,2 @@
 # garobo
-还没想好要干啥的一个工具
+spring boot + gradle
