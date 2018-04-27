@@ -17,10 +17,18 @@
 *.zip
 *.tar.gz
 *.rar
-.idea/*
-.idea*
-\.idea*
+
+##----------idea----------
+*.iml
+.idea/
+*.ipr
+*.iws
+
+# gradle
+build/
+out/
 .gradle
+gradle/
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
