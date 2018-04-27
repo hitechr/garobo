@@ -10,11 +10,13 @@ subprojects {
 
     ext {
         springBootVar = '1.4.5.RELEASE'
+        commonsLang3Var = '3.0'
     }
 
     dependencies {
         // spring boot
         compile "org.springframework.boot:spring-boot-starter-web:$springBootVar"
+        compile "org.apache.commons:commons-lang3:$commonsLang3Var"
 
         testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVar"
     }
@@ -38,8 +40,6 @@ subprojects {
         maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
         mavenCentral()
         jcenter()
-        maven { url "http://repo.spring.io/snapshot" }
-        maven { url "http://repo.spring.io/milestone" }
         maven { url 'http://maven.springframework.org/release' }
         maven { url 'http://maven.springframework.org/milestone' }
     }

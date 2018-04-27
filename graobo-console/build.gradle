@@ -3,18 +3,18 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
 sourceCompatibility = 1.8
 
 buildscript {
-    repositories {niikiidindddddhttps://github.com/azkaban/azkaban.git
+    repositories {
         mavenLocal()
         maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
-        maven { url "http://repo.spring.io/snapshot" }
-        maven { url "http://repo.spring.io/milestone" }
         jcenter()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.5.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVar")
     }
 }
 
@@ -26,7 +26,12 @@ dependencies {
     //compile project(':modules')
 
     // spring boot
-    compile "org.springframework.boot:spring-boot-starter-web:$springBootVar"
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2')
+    compile ('org.apache.commons:commons-lang3')
+    runtime('mysql:mysql-connector-java')
+    compile('org.aspectj:aspectjrt:1.8.9')
+    compileOnly('org.projectlombok:lombok')
 
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVar"
 }
