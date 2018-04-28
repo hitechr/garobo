@@ -103,8 +103,11 @@
     </repositories>
 
     <modules>
-        <module>graobo-console</module>
-        <module>graobo-exec</module>
+        <module>garobo-console</module>
+        <module>garobo-exec</module>
+        <module>garobo-alarm</module>
+        <module>garobo-zookeepr</module>
+        <module>garobo-common</module>
     </modules>
 
 

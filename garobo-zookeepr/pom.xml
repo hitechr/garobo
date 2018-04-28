@@ -9,11 +9,11 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>org.hitechr.garobo</groupId>
-    <artifactId>garobo-exec</artifactId>
+    <artifactId>garobo-zookeeper</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>garobo-exec</name>
+    <name>garobo-zookeeper</name>
     <description>Demo project for Spring Boot</description>
 
 
