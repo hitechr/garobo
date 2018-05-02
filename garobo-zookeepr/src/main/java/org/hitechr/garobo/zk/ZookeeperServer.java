@@ -9,6 +9,7 @@ package org.hitechr.garobo.zk;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.recipes.cache.*;
 import org.apache.zookeeper.CreateMode;
 
 import java.nio.charset.Charset;
@@ -30,7 +31,7 @@ public class ZookeeperServer {
 
 
     /**
-     * 创建一个目录节点
+     * 创建一个临时目录节点
      * @param path
      * @param value
      * @throws Exception
@@ -40,12 +41,33 @@ public class ZookeeperServer {
             String forPath = client.create().creatingParentsIfNeeded()//若创建节点的父节点不存在会先创建父节点再创建子节点
                     .withMode(CreateMode.EPHEMERAL)//withMode节点类型，
                     .forPath(path, bytes(value));
-            log.info("create path:{}",forPath);
+            log.info("create path:{} value:{}",forPath,value);
         } catch (Exception e) {
             //CHECKSTYLE:ON
             ExceptionHandler.handleException(e);
         }
     }
+
+    /**
+     * 创建固定的目录 节点
+     * @param path
+     * @param value
+     */
+    public void createPathPer(String path,String value) {
+        try {
+            String forPath = client.create().creatingParentsIfNeeded()//若创建节点的父节点不存在会先创建父节点再创建子节点
+                    .withMode(CreateMode.PERSISTENT)//withMode节点类型，
+                    .forPath(path, bytes(value));
+            log.info("create path:{} value:{}",forPath,value);
+        } catch (Exception e) {
+            //CHECKSTYLE:ON
+            ExceptionHandler.handleException(e);
+        }
+    }
+
+
+
+
 
     /**
      * 更新
@@ -91,4 +113,48 @@ public class ZookeeperServer {
         return value.getBytes(Charset.forName("UTF-8"));
     }
 
+    /**
+     * 获取value的值
+     * @param path
+     * @return
+     */
+    public String getData(String path) throws Exception {
+        if(!isExisted(path)){
+            return null;
+        }
+        return new String(client.getData().forPath(path));
+    }
+
+    /**
+     * 给节点绑定监听事件
+     * @param path
+     * @param listener
+     */
+    public void addPathListener(String path,PathCacheListener listener){
+        try {
+            NodeCache nodeCache = new NodeCache(client,path);
+            nodeCache.start();
+            nodeCache.getListenable().addListener(()->listener.changed());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void addPathChildListener(String path,ChildrenCacheListener listener){
+
+        try {
+            PathChildrenCache cache = new PathChildrenCache(client, path, true);
+
+            cache.start(PathChildrenCache.StartMode.POST_INITIALIZED_EVENT);
+            cache.getListenable().addListener((client,event)->{
+                listener.change(event);
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void getChildData(String agentJobsPath) {
+    }
 }

@@ -17,7 +17,7 @@ import org.apache.zookeeper.KeeperException;
 public class ExceptionHandler {
     public static void handleException(final Exception cause) {
         if (isIgnoredException(cause) || isIgnoredException(cause.getCause())) {
-            log.debug("Elastic job: ignored exception for: {}", cause.getMessage());
+            log.debug("ignored exception for: {}", cause.getMessage());
         } else if (cause instanceof InterruptedException) {
             Thread.currentThread().interrupt();
         } else {

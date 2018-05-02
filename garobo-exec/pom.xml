@@ -8,15 +8,14 @@
         <artifactId>garobo</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <groupId>org.hitechr.garobo</groupId>
     <artifactId>garobo-exec</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>garobo-exec</name>
-    <description>Demo project for Spring Boot</description>
-
-
+    <description>执行器</description>
     <dependencies>
 
 
@@ -26,8 +25,8 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
@@ -39,6 +38,30 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-jobs</artifactId>
+        </dependency>
+        <dependency><!-- 该依赖必加，里面有sping对schedule的支持 -->
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hitechr.garobo</groupId>
+            <artifactId>garobo-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hitechr.garobo</groupId>
+            <artifactId>garobo-zookeeper</artifactId>
         </dependency>
     </dependencies>
 

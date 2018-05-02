@@ -9,6 +9,10 @@ package org.hitechr.garobo.zk;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 /**
  * @Descriptions: 注册中心zk的配置
@@ -19,7 +23,9 @@ import lombok.Setter;
 // https://www.jianshu.com/p/b71845c142d0
 // spring boot1.5以上版本@ConfigurationProperties取消location注解后的替代方案
 //@Component
-//@ConfigurationProperties(prefix = "zookeeper",locations = "classpath:/zookeeper.properties")
+@ConfigurationProperties(prefix = "zookeeper")
+@Configuration
+@PropertySource("classpath:/zookeeper.properties")
 public class ZookeeperConfiguration {
 
     private String address;
@@ -27,6 +33,9 @@ public class ZookeeperConfiguration {
      * 命名空间.
      */
     private String namespace;
+
+    public ZookeeperConfiguration() {
+    }
 
     public ZookeeperConfiguration(String address, String namespace) {
         this.address = address;
