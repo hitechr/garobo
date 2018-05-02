@@ -15,6 +15,10 @@ import org.hitechr.garobo.zk.ZookeeperServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.hitechr.garobo.common.ZKPath.getAgentJobsPath;
 import static org.hitechr.garobo.common.ZKPath.getAgentStatusPath;
 
@@ -72,9 +76,46 @@ public class ZKSevice {
         zookeeperServer.addPathChildListener(agentJobsPath,new AddJobEventListener());
     }
 
+    /**
+     * 初始化当前机器可以执行的job
+     * @param machineInfo
+     */
     public void initSchedulerJob(MachineInfo machineInfo) {
         String ip = machineInfo.getIp();
         String agentJobsPath = getAgentJobsPath(ip);
-        zookeeperServer.getChildData(agentJobsPath);
+        List<String> childPathList = zookeeperServer.getChildPath(agentJobsPath);
+        childPathList.stream()
+                .filter(child->{
+                    String childPath=agentJobsPath + "/" + child;
+                    String data = zookeeperServer.getData(childPath);
+                    log.info("path:{},data:{}",childPath,data);
+                    return "0".equals(data);
+                })
+                .forEach(child->{
+
+
+
+        });
+    }
+
+    public static void main(String[] args) {
+        List<String> list= new ArrayList<>();
+        list.add("0");
+        list.add("2");
+        list.add("1");
+        list.add("3");
+        /**
+         * child->{
+         String childPath=agentJobsPath + "/" + child;
+         String data = zookeeperServer.getData(childPath);
+         log.info("path:{},data:{}",childPath,data);
+         return "0".equals(data);
+         }
+         */
+
+        list.stream().filter("0"::equals)
+                .forEach(System.out::println);
+
+        System.out.println("ok");
     }
 }

@@ -7,12 +7,15 @@ package org.hitechr.garobo.zk;
  * @version V1.0
  */
 
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.*;
 import org.apache.zookeeper.CreateMode;
 
 import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @Descriptions: zk配置中心的访问类，单利
@@ -43,7 +46,6 @@ public class ZookeeperServer {
                     .forPath(path, bytes(value));
             log.info("create path:{} value:{}",forPath,value);
         } catch (Exception e) {
-            //CHECKSTYLE:ON
             ExceptionHandler.handleException(e);
         }
     }
@@ -60,7 +62,6 @@ public class ZookeeperServer {
                     .forPath(path, bytes(value));
             log.info("create path:{} value:{}",forPath,value);
         } catch (Exception e) {
-            //CHECKSTYLE:ON
             ExceptionHandler.handleException(e);
         }
     }
@@ -81,7 +82,6 @@ public class ZookeeperServer {
                     forPath(key, bytes(value)).and().commit();
             //CHECKSTYLE:OFF
         } catch (final Exception ex) {
-            //CHECKSTYLE:ON
             ExceptionHandler.handleException(ex);
         }
     }
@@ -94,9 +94,7 @@ public class ZookeeperServer {
     public boolean isExisted(final String key) {
         try {
             return null != client.checkExists().forPath(key);
-            //CHECKSTYLE:OFF
         } catch (final Exception ex) {
-            //CHECKSTYLE:ON
             ExceptionHandler.handleException(ex);
             return false;
         }
@@ -118,11 +116,17 @@ public class ZookeeperServer {
      * @param path
      * @return
      */
-    public String getData(String path) throws Exception {
-        if(!isExisted(path)){
-            return null;
+    public String getData(String path)  {
+        try {
+            if(!isExisted(path)){
+                return null;
+            }
+            return new String(client.getData().forPath(path));
+        } catch (Exception e) {
+            e.printStackTrace();
+            ExceptionHandler.handleException(e);
         }
-        return new String(client.getData().forPath(path));
+        return null;
     }
 
     /**
@@ -137,6 +141,7 @@ public class ZookeeperServer {
             nodeCache.getListenable().addListener(()->listener.changed());
         } catch (Exception e) {
             e.printStackTrace();
+            ExceptionHandler.handleException(e);
         }
     }
     public void addPathChildListener(String path,ChildrenCacheListener listener){
@@ -145,16 +150,31 @@ public class ZookeeperServer {
             PathChildrenCache cache = new PathChildrenCache(client, path, true);
 
             cache.start(PathChildrenCache.StartMode.POST_INITIALIZED_EVENT);
-            cache.getListenable().addListener((client,event)->{
-                listener.change(event);
-            });
+            cache.getListenable().addListener((client,event)-> listener.change(event)
+            );
         } catch (Exception e) {
             e.printStackTrace();
+            ExceptionHandler.handleException(e);
         }
 
 
     }
 
-    public void getChildData(String agentJobsPath) {
+    /**
+     * 获取孩子节点
+     * @param path
+     * @return
+     */
+    public List<String> getChildPath(String path) {
+        try {
+            return client.getChildren().forPath(path);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            ExceptionHandler.handleException(e);
+        }
+        return Lists.newArrayList();
+
+
     }
 }
