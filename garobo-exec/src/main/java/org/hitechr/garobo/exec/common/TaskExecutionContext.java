@@ -1,6 +1,7 @@
 package org.hitechr.garobo.exec.common;
 
 import lombok.Getter;
+import org.hitechr.garobo.common.Constants;
 import org.hitechr.garobo.common.utils.SerNumUtils;
 import org.quartz.JobExecutionContext;
 
@@ -15,10 +16,16 @@ public class TaskExecutionContext {
 
     @Getter
     private String uuid;
+    @Getter
+    private String fullPath;
+
+    @Getter
+    private TaskCommand taskCommand;
 
     public TaskExecutionContext(JobExecutionContext jobExecutionContext) {
         this.jobExecutionContext = jobExecutionContext;
         uuid= SerNumUtils.uuid();
+        taskCommand = (TaskCommand)jobExecutionContext.getMergedJobDataMap().get(Constants.JOBDATA);
     }
 
     public JobExecutionContext getJobExecutionContext() {

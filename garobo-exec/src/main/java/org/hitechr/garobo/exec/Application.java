@@ -7,8 +7,12 @@ package org.hitechr.garobo.exec;
  * @version V1.0
  */
 
+import org.hitechr.garobo.common.Constants;
 import org.hitechr.garobo.common.utils.MachineUtils;
 import org.hitechr.garobo.exec.common.MachineInfo;
+import org.hitechr.garobo.exec.job.JobCommandFacory;
+import org.hitechr.garobo.exec.job.ShellJobCommand;
+import org.hitechr.garobo.exec.listener.ShellJobCommandListener;
 import org.hitechr.garobo.exec.utils.SchedulerUtils;
 import org.hitechr.garobo.zk.ZookeeperConfiguration;
 import org.hitechr.garobo.zk.ZookeeperServer;
@@ -48,10 +52,20 @@ public class Application {
 
     @Bean
     public ZookeeperServer zookeeperServer(Scheduler scheduler,ZookeeperConfiguration zkConfiguration){
-        ZookeeperServer zookeeperServer= new ZookeeperServer(zkConfiguration);
-        SchedulerUtils.init(zookeeperServer,scheduler);
-        return  zookeeperServer;
+//        ZookeeperServer zookeeperServer= new ZookeeperServer(zkConfiguration);
+//        SchedulerUtils.init(zookeeperServer,scheduler);
+//        return  zookeeperServer;
+        return null;
     }
+
+
+    @Bean
+    public ShellJobCommand shellJobCommand(ShellJobCommandListener shellJobCommandListener){
+        ShellJobCommand shellJobCommand = new ShellJobCommand(shellJobCommandListener);
+        JobCommandFacory.addJobCommand(Constants.JOB_COMMAND_TYPE_SHELL,shellJobCommand);
+        return shellJobCommand;
+    }
+
 
     /**
      * 初始化机器 信息

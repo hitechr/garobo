@@ -8,6 +8,7 @@ package org.hitechr.garobo.exec.job;
  */
 
 import org.hitechr.garobo.exec.common.TaskExecutionContext;
+import org.hitechr.garobo.exec.listener.JobCommandListener;
 
 /**
  * @Descriptions:
@@ -16,10 +17,17 @@ import org.hitechr.garobo.exec.common.TaskExecutionContext;
 public class ShellJobCommand extends JobCommand {
 
 
+    public ShellJobCommand(JobCommandListener jobCommandListener) {
+        super(jobCommandListener);
+    }
+
     @Override
     public int execute(TaskExecutionContext context) {
 
 
+
         return 0;
     }
+
+
 }

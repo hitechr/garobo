@@ -7,6 +7,8 @@
 
 package org.hitechr.garobo.model;
 
+import jdk.nashorn.internal.objects.annotations.Getter;
+
 import java.io.Serializable;
 
 
@@ -33,7 +35,10 @@ public class Job implements Serializable {
     
 		private Integer orderNum;  
     
-		private Integer groupId;  
+		private Integer groupId;
+
+
+		private Integer successCode;
     
 		private java.util.Date insertDate;  
     
@@ -135,9 +140,15 @@ public class Job implements Serializable {
       
     public java.util.Date getUdateDate() {  
         return this.udateDate;  
-    }  
-	
-	
+    }
 
+
+    public Integer getSuccessCode() {
+        return successCode;
+    }
+
+    public void setSuccessCode(Integer successCode) {
+        this.successCode = successCode;
+    }
 }
 

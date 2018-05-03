@@ -7,12 +7,25 @@ package org.hitechr.garobo.exec.job;
  * @version V1.0
  */
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
 /**
  * @Descriptions:
  */
 public class JobCommandFacory {
 
-    public static Class<ShellJobCommand> commdType(Integer type) {
-        return ShellJobCommand.class;
+    private static ConcurrentMap<Integer,JobCommand> commandConcurrentMap=new ConcurrentHashMap<>();
+
+    public static Class<? extends JobCommand> commdTypeClass(Integer type) {
+        return commdType(type).getClass();
+    }
+
+
+    public static JobCommand commdType(Integer type) {
+        return commandConcurrentMap.get(type);
+    }
+    public static void addJobCommand(Integer type,JobCommand jobCommand){
+        commandConcurrentMap.putIfAbsent(type,jobCommand);
     }
 }

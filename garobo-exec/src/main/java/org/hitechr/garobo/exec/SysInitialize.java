@@ -41,13 +41,13 @@ public class SysInitialize implements ApplicationContextAware, InitializingBean 
     @Override
     public void afterPropertiesSet() throws Exception {
 
-        startScheduler();
+//        startScheduler();
 
 //        initAgentZk();
 
-        initScheduler();
+//        initScheduler();
 
-        addListener();
+//        addListener();
     }
 
     /**
