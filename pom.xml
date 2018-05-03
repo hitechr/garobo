@@ -73,6 +73,11 @@
                <artifactId>garobo-zookeeper</artifactId>
                <version>0.0.1-SNAPSHOT</version>
            </dependency>
+           <dependency>
+               <groupId>org.hitechr.garobo</groupId>
+               <artifactId>garobo-model</artifactId>
+               <version>0.0.1-SNAPSHOT</version>
+           </dependency>
           </dependencies>
         <!--<dependencies>
 
@@ -187,6 +192,7 @@
         <module>garobo-alarm</module>
         <module>garobo-zookeepr</module>
         <module>garobo-common</module>
+        <module>garobo-model</module>
     </modules>
 
 

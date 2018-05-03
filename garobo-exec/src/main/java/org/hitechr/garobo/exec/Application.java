@@ -9,6 +9,7 @@ package org.hitechr.garobo.exec;
 
 import org.hitechr.garobo.common.utils.MachineUtils;
 import org.hitechr.garobo.exec.common.MachineInfo;
+import org.hitechr.garobo.exec.utils.SchedulerUtils;
 import org.hitechr.garobo.zk.ZookeeperConfiguration;
 import org.hitechr.garobo.zk.ZookeeperServer;
 import org.quartz.Scheduler;
@@ -46,8 +47,9 @@ public class Application {
 
 
     @Bean
-    public ZookeeperServer zookeeperServer(ZookeeperConfiguration zkConfiguration){
+    public ZookeeperServer zookeeperServer(Scheduler scheduler,ZookeeperConfiguration zkConfiguration){
         ZookeeperServer zookeeperServer= new ZookeeperServer(zkConfiguration);
+        SchedulerUtils.init(zookeeperServer,scheduler);
         return  zookeeperServer;
     }
 

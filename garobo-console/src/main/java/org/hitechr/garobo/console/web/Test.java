@@ -7,7 +7,6 @@ package org.hitechr.garobo.console.web;
  * @version V1.0
  */
 
-import org.hitechr.garobo.console.model.Job;
 import org.hitechr.garobo.console.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

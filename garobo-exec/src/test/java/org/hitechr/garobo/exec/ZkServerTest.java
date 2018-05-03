@@ -7,8 +7,11 @@ package org.hitechr.garobo.exec;
  * @version V1.0
  */
 
+import com.alibaba.fastjson.JSONObject;
 import org.hitechr.garobo.exec.common.MachineInfo;
 import org.hitechr.garobo.exec.service.ZKSevice;
+import org.hitechr.garobo.model.Job;
+import org.hitechr.garobo.zk.ZookeeperServer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,34 @@ public class ZkServerTest  {
 
     @Autowired
     private ZKSevice zkServer;
+
+    @Autowired
+    private ZookeeperServer zookeeperServer;
+
+    @Test
+    public void createJob(){
+
+        Job job= new Job();
+        job.setName("job_0");
+        job.setGroupId(1);
+        job.setJobCron("0 0/10 * * * ? ");
+        job.setJobDesc("测试程序");
+        job.setOrderNum(0);
+
+        String jobData = JSONObject.toJSONString(job);
+        String path="/jobs/"+job.getName();
+        zookeeperServer.createPathPer(path,jobData);
+        path="/agent/192.168.2.12/jobs/"+job.getName();
+        zookeeperServer.createPathPer(path,jobData);
+
+
+        try {
+            Thread.sleep(10000*1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Test
     public void testRegister(){
         String ip="192.168.2.12";

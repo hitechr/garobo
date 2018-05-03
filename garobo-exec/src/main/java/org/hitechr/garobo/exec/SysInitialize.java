@@ -10,6 +10,7 @@ package org.hitechr.garobo.exec;
 import lombok.extern.slf4j.Slf4j;
 import org.hitechr.garobo.exec.common.MachineInfo;
 import org.hitechr.garobo.exec.service.ZKSevice;
+import org.hitechr.garobo.exec.utils.SchedulerUtils;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.springframework.beans.BeansException;
@@ -39,7 +40,8 @@ public class SysInitialize implements ApplicationContextAware, InitializingBean 
 
     @Override
     public void afterPropertiesSet() throws Exception {
-//        startScheduler();
+
+        startScheduler();
 
 //        initAgentZk();
 

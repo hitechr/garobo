@@ -167,7 +167,11 @@ public class ZookeeperServer {
      */
     public List<String> getChildPath(String path) {
         try {
-            return client.getChildren().forPath(path);
+            if(isExisted(path)){
+                return client.getChildren().forPath(path);
+            }
+            return Lists.newArrayList();
+
 
         } catch (Exception e) {
             e.printStackTrace();

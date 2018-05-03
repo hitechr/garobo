@@ -20,6 +20,11 @@
     <dependencies>
 
         <dependency>
+            <groupId>org.hitechr.garobo</groupId>
+            <artifactId>garobo-model</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
