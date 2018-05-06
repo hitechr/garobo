@@ -18,6 +18,16 @@ public class ShellJobCommandListener implements JobCommandListener {
 
     @Override
     public boolean before(TaskCommand taskCommand) {
+        //验证当前job依赖的job是否都成功执行,
+        zkSevice.depJobDone(taskCommand.getRunId(),taskCommand.getName());
+
+
+        //验证当前运行中的任务是否已经达到上限
+//        zkSevice.
+
+
+
+
         return true;
     }
 

@@ -13,7 +13,9 @@ import org.hitechr.garobo.exec.common.MachineInfo;
 import org.hitechr.garobo.exec.job.JobCommandFacory;
 import org.hitechr.garobo.exec.job.ShellJobCommand;
 import org.hitechr.garobo.exec.listener.ShellJobCommandListener;
+import org.hitechr.garobo.exec.service.ZKSevice;
 import org.hitechr.garobo.exec.utils.SchedulerUtils;
+import org.hitechr.garobo.exec.utils.TaskControl;
 import org.hitechr.garobo.zk.ZookeeperConfiguration;
 import org.hitechr.garobo.zk.ZookeeperServer;
 import org.quartz.Scheduler;
@@ -51,11 +53,15 @@ public class Application {
 
 
     @Bean
-    public ZookeeperServer zookeeperServer(Scheduler scheduler,ZookeeperConfiguration zkConfiguration){
+    public ZookeeperServer zookeeperServer(ZookeeperConfiguration zkConfiguration){
 //        ZookeeperServer zookeeperServer= new ZookeeperServer(zkConfiguration);
-//        SchedulerUtils.init(zookeeperServer,scheduler);
 //        return  zookeeperServer;
         return null;
+    }
+
+    @Bean
+    public void initScheduler(ZKSevice zkSevice, Scheduler scheduler){
+        SchedulerUtils.init(zkSevice,scheduler);
     }
 
 

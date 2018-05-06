@@ -11,4 +11,13 @@ public interface Constants {
     Integer JOB_COMMAND_TYPE_SHELL=1;
 
 
+    String status="status";
+    String execute="execute";
+    String result="result";
+    String dependent="dependent";
+
+    String status_running="running";
+
+
+    String name="name";
 }

@@ -14,6 +14,7 @@ import org.hitechr.garobo.common.utils.DateUtils;
 import org.hitechr.garobo.exec.common.TaskCommand;
 import org.hitechr.garobo.exec.common.TaskExecutionContext;
 import org.hitechr.garobo.exec.listener.JobCommandListener;
+import org.hitechr.garobo.exec.utils.SchedulerUtils;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -47,14 +48,27 @@ public abstract class JobCommand implements Job {
             int result=-1;
             JobCommandException exception=null;
             try {
-                if(jobCommandListener.before(taskCommand)){
-                    taskCommand.setStartDate(new Date());
-                    result= execute(taskExecutionContext);
+
+                boolean execute=true;
+                if(jobCommandListener!=null){
+                    execute=jobCommandListener.before(taskCommand);
                 }
+
+                if(execute){
+                    SchedulerUtils.creatRunningData(taskCommand);//创建正在运行的节点信息
+                    result= execute(taskExecutionContext);
+                    if(result==taskCommand.getSuccessCode()){//如果成功则进入/result节点记录
+                        SchedulerUtils.finishTask(result,taskCommand);
+                    }
+                }
+
+
             } catch (Exception e) {
                 exception=new JobCommandException(e);
             }
-            jobCommandListener.after(result,taskCommand,exception);
+            if(jobCommandListener!=null){
+                jobCommandListener.after(result,taskCommand,exception);
+            }
 
         } catch (Exception e) {
             log.info("job:{} UUID:{},error:{}",this.getClass(),taskExecutionContext.getUuid(),e.getCause());

@@ -21,22 +21,7 @@ public class TaskControl {
         return true;
     }
 
-    /**
-     * 创造正在执行的节点信息
-     * @param taskCommand
-     * @return
-     */
-    private static boolean creatRunningData(TaskCommand taskCommand){
 
-        return true;
-    }
 
-    /**
-     * 任务执行完后的信息
-     * @param result
-     * @param taskCommand
-     */
-    public static void finishTask(int result,TaskCommand taskCommand){
 
-    }
 }

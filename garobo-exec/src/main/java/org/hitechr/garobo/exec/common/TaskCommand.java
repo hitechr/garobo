@@ -19,6 +19,10 @@ public class TaskCommand extends Job{
 
 
 
+    private int runId;//运行的id
+
+    private String executeIp;
+
     private Date startDate;
     private Date endDate;
 

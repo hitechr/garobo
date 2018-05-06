@@ -10,12 +10,14 @@ package org.hitechr.garobo.zk;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.api.transaction.CuratorTransaction;
+import org.apache.curator.framework.api.transaction.CuratorTransactionFinal;
+import org.apache.curator.framework.api.transaction.TransactionCreateBuilder;
 import org.apache.curator.framework.recipes.cache.*;
 import org.apache.zookeeper.CreateMode;
 
 import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Descriptions: zk配置中心的访问类，单利
@@ -178,6 +180,62 @@ public class ZookeeperServer {
             ExceptionHandler.handleException(e);
         }
         return Lists.newArrayList();
+
+
+    }
+
+    /**
+     * 一起创建多个节点
+     * @param map
+     */
+    public void createPath(Map<String, String> map) {
+
+        CuratorTransaction curatorTransaction = client.inTransaction();
+
+        TransactionCreateBuilder transactionCreateBuilder = curatorTransaction.create();
+        Set<String> strings = map.keySet();
+        Iterator<String> iterator = strings.iterator();
+        int i=0;
+        CuratorTransactionFinal finalAnd=null;
+        for(String path:strings){
+
+            String value = map.get(path);
+            try {
+                CuratorTransactionFinal and = transactionCreateBuilder.forPath(path, bytes(value)).and();
+                transactionCreateBuilder = and.create();
+                if(i==strings.size()-1){
+                    finalAnd=and;
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            i++;
+        }
+
+        if(finalAnd!=null){
+            try {
+                finalAnd.commit();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public void createPathAndDeletePath(String path, String value, String deletePath,List<String> depJobListPath) {
+
+        log.info("create path:{} and delete path:{}",path,deletePath);
+        try {
+            this.client.inTransaction().create()
+                    .forPath(path,bytes(value))
+                    .and().delete()
+                    .forPath(deletePath)
+                    .and().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
 
     }
