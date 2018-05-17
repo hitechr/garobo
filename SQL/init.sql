@@ -1,5 +1,7 @@
 CREATE DATABASE `garobo`;
 USE garobo;
+
+DROP TABLE IF EXISTS `g_job`;
 CREATE TABLE `g_job` (
   `id` INT(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` VARCHAR(32) NOT NULL COMMENT '任务的名称',
@@ -20,7 +22,7 @@ CREATE TABLE `g_job` (
   PRIMARY KEY (`id`),
   KEY `GROUPID` (`groupId`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
-
+DROP TABLE IF EXISTS `g_group`;
 CREATE TABLE `g_group` (
   `id` INT(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` VARCHAR(32) NOT NULL COMMENT '组名称名称',
@@ -32,6 +34,7 @@ CREATE TABLE `g_group` (
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `g_job_dep`;
 CREATE TABLE `g_job_dep` (
   `id` INT(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `depjob_id` INT(10) NOT NULL COMMENT '依赖任务ID',
@@ -42,7 +45,7 @@ CREATE TABLE `g_job_dep` (
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-
+DROP TABLE IF EXISTS `g_job_record`;
 CREATE TABLE `g_job_record` (
   `id` INT(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `job_name` VARCHAR(32) NULL COMMENT '执行任务名称',
@@ -71,7 +74,7 @@ CREATE TABLE `g_job_record` (
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-
+DROP TABLE IF EXISTS `g_executer`;
 CREATE TABLE `g_executer` (
   `id` INT(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `ip` VARCHAR(32) NOT NULL COMMENT '执行器IP',
@@ -81,6 +84,7 @@ CREATE TABLE `g_executer` (
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `g_job_executer`;
 CREATE TABLE `g_job_executer` (
   `id` INT(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `exec_id` INT(10) NOT NULL COMMENT '执行器ID',

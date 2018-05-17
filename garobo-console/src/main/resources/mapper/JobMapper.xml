@@ -11,11 +11,15 @@
 			<result property="type" column="type"/>
 			<result property="last" column="last"/>
 			<result property="status" column="status"/>
-			<result property="jobCron" column="jobCron"/>
+			<result property="jobCron" column="job_cron"/>
 			<result property="command" column="command"/>
 			<result property="jobDesc" column="jobDesc"/>
-			<result property="orderNum" column="orderNum"/>
-			<result property="groupId" column="groupId"/>
+			<result property="flowNum" column="flow_num"/>
+			<result property="groupId" column="group_id"/>
+			<result property="successCode" column="success_code"/>
+			<result property="weight" column="weight"/>
+			<result property="redo" column="redo"/>
+			<result property="redoGap" column="redo_gap"/>
 			<result property="insertDate" column="insert_date"/>
 			<result property="udateDate" column="udate_date"/>
 	</resultMap>
@@ -101,11 +105,15 @@
 		type,
 		last,
 		status,
-		jobCron,
+		job_cron,
 		command,
 		jobDesc,
-		orderNum,
-		groupId,
+		flow_num,
+		group_id,
+		success_code,
+		weight,
+		redo,
+		redo_gap,
 		insert_date,
 		udate_date
   </sql>
@@ -120,11 +128,15 @@
 		type,
 		last,
 		status,
-		jobCron,
+		job_cron,
 		command,
 		jobDesc,
-		orderNum,
-		groupId,
+		flow_num,
+		group_id,
+		success_code,
+		weight,
+		redo,
+		redo_gap,
 		insert_date,
 		udate_date
   </sql>
@@ -216,8 +228,12 @@
 			#{jobCron} ,
 			#{command} ,
 			#{jobDesc} ,
-			#{orderNum} ,
+			#{flowNum} ,
 			#{groupId} ,
+			#{successCode} ,
+			#{weight} ,
+			#{redo} ,
+			#{redoGap} ,
 			#{insertDate} ,
 			#{udateDate} 
       )
@@ -238,11 +254,15 @@
 		<if test="type != null" >type</if> ,
 		<if test="last != null" >last</if> ,
 		<if test="status != null" >status</if> ,
-		<if test="jobCron != null" >jobCron</if> ,
+		<if test="jobCron != null" >job_cron</if> ,
 		<if test="command != null" >command</if> ,
 		<if test="jobDesc != null" >jobDesc</if> ,
-		<if test="orderNum != null" >orderNum</if> ,
-		<if test="groupId != null" >groupId</if> ,
+		<if test="flowNum != null" >flow_num</if> ,
+		<if test="groupId != null" >group_id</if> ,
+		<if test="successCode != null" >success_code</if> ,
+		<if test="weight != null" >weight</if> ,
+		<if test="redo != null" >redo</if> ,
+		<if test="redoGap != null" >redo_gap</if> ,
 		<if test="insertDate != null" >insert_date</if> ,
 		<if test="udateDate != null" >udate_date</if> 
     </trim>
@@ -256,8 +276,12 @@
 		<if test="jobCron != null" >#{jobCron}</if>,
 		<if test="command != null" >#{command}</if>,
 		<if test="jobDesc != null" >#{jobDesc}</if>,
-		<if test="orderNum != null" >#{orderNum}</if>,
+		<if test="flowNum != null" >#{flowNum}</if>,
 		<if test="groupId != null" >#{groupId}</if>,
+		<if test="successCode != null" >#{successCode}</if>,
+		<if test="weight != null" >#{weight}</if>,
+		<if test="redo != null" >#{redo}</if>,
+		<if test="redoGap != null" >#{redoGap}</if>,
 		<if test="insertDate != null" >#{insertDate}</if>,
 		<if test="udateDate != null" >#{udateDate}</if>
     </trim>
@@ -298,8 +322,8 @@
 			<if test="record.status != null" >
 				status = #{status} ,
 			</if>
-			<if test="record.jobCron != null" >
-				jobCron = #{jobCron} ,
+			<if test="record.job_cron != null" >
+				job_cron = #{jobCron} ,
 			</if>
 			<if test="record.command != null" >
 				command = #{command} ,
@@ -307,11 +331,23 @@
 			<if test="record.jobDesc != null" >
 				jobDesc = #{jobDesc} ,
 			</if>
-			<if test="record.orderNum != null" >
-				orderNum = #{orderNum} ,
+			<if test="record.flow_num != null" >
+				flow_num = #{flowNum} ,
 			</if>
-			<if test="record.groupId != null" >
-				groupId = #{groupId} ,
+			<if test="record.group_id != null" >
+				group_id = #{groupId} ,
+			</if>
+			<if test="record.success_code != null" >
+				success_code = #{successCode} ,
+			</if>
+			<if test="record.weight != null" >
+				weight = #{weight} ,
+			</if>
+			<if test="record.redo != null" >
+				redo = #{redo} ,
+			</if>
+			<if test="record.redo_gap != null" >
+				redo_gap = #{redoGap} ,
 			</if>
 			<if test="record.insert_date != null" >
 				insert_date = #{insertDate} ,
@@ -339,11 +375,15 @@
 		type = #{type} ,
 		last = #{last} ,
 		status = #{status} ,
-		jobCron = #{jobCron} ,
+		job_cron = #{jobCron} ,
 		command = #{command} ,
 		jobDesc = #{jobDesc} ,
-		orderNum = #{orderNum} ,
-		groupId = #{groupId} ,
+		flow_num = #{flowNum} ,
+		group_id = #{groupId} ,
+		success_code = #{successCode} ,
+		weight = #{weight} ,
+		redo = #{redo} ,
+		redo_gap = #{redoGap} ,
 		insert_date = #{insertDate} ,
 		udate_date = #{udateDate} 
     <if test="_parameter != null" >
@@ -371,8 +411,8 @@
 		  <if test="status != null" >
 			status = #{status} ,
 		  </if>
-		  <if test="jobCron != null" >
-			jobCron = #{jobCron} ,
+		  <if test="job_cron != null" >
+			job_cron = #{jobCron} ,
 		  </if>
 		  <if test="command != null" >
 			command = #{command} ,
@@ -380,11 +420,23 @@
 		  <if test="jobDesc != null" >
 			jobDesc = #{jobDesc} ,
 		  </if>
-		  <if test="orderNum != null" >
-			orderNum = #{orderNum} ,
+		  <if test="flow_num != null" >
+			flow_num = #{flowNum} ,
 		  </if>
-		  <if test="groupId != null" >
-			groupId = #{groupId} ,
+		  <if test="group_id != null" >
+			group_id = #{groupId} ,
+		  </if>
+		  <if test="success_code != null" >
+			success_code = #{successCode} ,
+		  </if>
+		  <if test="weight != null" >
+			weight = #{weight} ,
+		  </if>
+		  <if test="redo != null" >
+			redo = #{redo} ,
+		  </if>
+		  <if test="redo_gap != null" >
+			redo_gap = #{redoGap} ,
 		  </if>
 		  <if test="insert_date != null" >
 			insert_date = #{insertDate} ,
@@ -417,8 +469,8 @@
 	  <if test="status != null" >
 		status = #{status} ,
 	  </if>
-	  <if test="jobCron != null" >
-		jobCron = #{jobCron} ,
+	  <if test="job_cron != null" >
+		job_cron = #{jobCron} ,
 	  </if>
 	  <if test="command != null" >
 		command = #{command} ,
@@ -426,11 +478,23 @@
 	  <if test="jobDesc != null" >
 		jobDesc = #{jobDesc} ,
 	  </if>
-	  <if test="orderNum != null" >
-		orderNum = #{orderNum} ,
+	  <if test="flow_num != null" >
+		flow_num = #{flowNum} ,
 	  </if>
-	  <if test="groupId != null" >
-		groupId = #{groupId} ,
+	  <if test="group_id != null" >
+		group_id = #{groupId} ,
+	  </if>
+	  <if test="success_code != null" >
+		success_code = #{successCode} ,
+	  </if>
+	  <if test="weight != null" >
+		weight = #{weight} ,
+	  </if>
+	  <if test="redo != null" >
+		redo = #{redo} ,
+	  </if>
+	  <if test="redo_gap != null" >
+		redo_gap = #{redoGap} ,
 	  </if>
 	  <if test="insert_date != null" >
 		insert_date = #{insertDate} ,

@@ -7,8 +7,6 @@
 
 package org.hitechr.garobo.model;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
-
 import java.io.Serializable;
 
 
@@ -33,12 +31,15 @@ public class Job implements Serializable {
     
 		private String jobDesc;  
     
-		private Integer orderNum;  
+		private Integer flowNum;  
     
-		private Integer groupId;
-
-
-		private Integer successCode;
+		private Integer successCode;  
+    
+		private Integer weight;  
+    
+		private Integer redo;  
+    
+		private Integer redoGap;  
     
 		private java.util.Date insertDate;  
     
@@ -110,20 +111,44 @@ public class Job implements Serializable {
         return this.jobDesc;  
     }  
     
-    public void setOrderNum(Integer orderNum) {  
-        this.orderNum = orderNum;  
+    public void setFlowNum(Integer flowNum) {  
+        this.flowNum = flowNum;  
     }  
       
-    public Integer getOrderNum() {  
-        return this.orderNum;  
+    public Integer getFlowNum() {  
+        return this.flowNum;  
     }  
     
-    public void setGroupId(Integer groupId) {  
-        this.groupId = groupId;  
+    public void setSuccessCode(Integer successCode) {  
+        this.successCode = successCode;  
     }  
       
-    public Integer getGroupId() {  
-        return this.groupId;  
+    public Integer getSuccessCode() {  
+        return this.successCode;  
+    }  
+    
+    public void setWeight(Integer weight) {  
+        this.weight = weight;  
+    }  
+      
+    public Integer getWeight() {  
+        return this.weight;  
+    }  
+    
+    public void setRedo(Integer redo) {  
+        this.redo = redo;  
+    }  
+      
+    public Integer getRedo() {  
+        return this.redo;  
+    }  
+    
+    public void setRedoGap(Integer redoGap) {  
+        this.redoGap = redoGap;  
+    }  
+      
+    public Integer getRedoGap() {  
+        return this.redoGap;  
     }  
     
     public void setInsertDate(java.util.Date insertDate) {  
@@ -140,15 +165,9 @@ public class Job implements Serializable {
       
     public java.util.Date getUdateDate() {  
         return this.udateDate;  
-    }
+    }  
+	
+	
 
-
-    public Integer getSuccessCode() {
-        return successCode;
-    }
-
-    public void setSuccessCode(Integer successCode) {
-        this.successCode = successCode;
-    }
 }
 
