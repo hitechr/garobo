@@ -21,17 +21,14 @@ import org.hitechr.garobo.model.Job;
 import org.hitechr.garobo.zk.ZookeeperServer;
 import org.quartz.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 import static org.hitechr.garobo.zk.ZKPath.*;
 import static org.hitechr.garobo.zk.ZKPath.getExecutionJobPath;
 import static org.hitechr.garobo.zk.ZKPath.getExecutionJobStatus;
 import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
+import static java.util.stream.Collectors.*;
 
 /**
  * @Descriptions:
@@ -164,7 +161,10 @@ public class SchedulerUtils {
                 return;
             }
 
-            //加载
+            //获取依赖当前任务的下级任务
+            List<String> childJob = zkSevice.getChildJob(taskCommand.getName());
+            //判断待执行节点是否已经添加完成
+
 
 
             //创建pending上的数据
@@ -222,14 +222,11 @@ public class SchedulerUtils {
      * @return
      */
     private static List<String> createResultJobPath(String runId,List<String> depJobPaths) {
-
-        List<String> depJobListPath= Lists.newArrayList();
-
-        depJobPaths.stream().forEach(depJob->{
-            String executionJobDependent = getExecutionJobDependent(runId + "", depJob);
-            depJobListPath.add(executionJobDependent);
-        });
-        return depJobListPath;
+        List<String> collect = depJobPaths.stream()
+                .map(depJob -> {
+                    return getExecutionJobDependent(runId , depJob);
+                }).collect(toList());
+        return collect;
 
     }
 
@@ -242,14 +239,11 @@ public class SchedulerUtils {
      */
     private static List<String> createPendingJobPath(String runnid,List<String> childJobs) {
 
-       List<String> childJobList=Lists.newArrayList();
-
-        childJobs.stream().forEach(childJob->{
+        List<String> childJobList = childJobs.stream().map(childJob -> {
             TaskCommand jobData = getJobData(childJob);
             String executeIp = jobData.getExecuteIp();
-            String pendingJobPath = getPendingJobPath(executeIp, runnid + "");
-            childJobList.add(pendingJobPath);
-        });
+            return getPendingJobPath(executeIp, runnid + "");
+        }).collect(toList());
 
 
         return childJobList;
@@ -263,10 +257,14 @@ public class SchedulerUtils {
         final List<String> friends =
                 Arrays.asList("Brian", "Nate", "Neal", "Raju", "Sara", "Scott");
         List<String> list= new ArrayList<>();
-        Map<String, String> collect = friends.stream().collect(Collectors.toMap(String::toString,k->""));
+        Map<String, String> collect = friends.stream().collect(toMap(String::toString,k->""));
+
+        Map<String, String> collect1 = friends.stream().collect(groupingBy(String::toString,
+                collectingAndThen(maxBy(Comparator.comparingInt(a -> a.length())), Optional::get)
+        ));
 
 
-        collect.forEach((k,v)->{
+        collect1.forEach((k,v)->{
             System.out.println(" "+k+"  V:" +v);
         });
 

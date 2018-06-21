@@ -149,7 +149,8 @@ public class ZKSevice {
 
     public void createChildPath(List<String> childJobList) {
 
-        Map<String, String> collect = childJobList.stream().collect(Collectors.toMap(String::toString, v -> ""));
+        Map<String, String> collect = childJobList.stream()
+                .collect(Collectors.toMap(String::toString, v -> ""));
 
         zookeeperServer.createPath(collect);
     }
@@ -161,5 +162,14 @@ public class ZKSevice {
 
     public void createPath(String path,String value) {
         zookeeperServer.createPathPer(path,value);
+    }
+
+    /**
+     * 获取当前任务的子任务
+     * @param jobName
+     */
+    public List<String> getChildJob(String jobName) {
+        String jobChildPath = getJobChilds(jobName);
+        return this.getChildPath(jobChildPath);
     }
 }
