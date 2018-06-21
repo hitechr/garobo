@@ -23,7 +23,7 @@ public class ShellJobCommandListener implements JobCommandListener {
 
 
         //验证当前运行中的任务是否已经达到上限
-//        zkSevice.
+//        zkSevice.get
 
 
 

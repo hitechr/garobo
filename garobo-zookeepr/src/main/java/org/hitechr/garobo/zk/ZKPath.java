@@ -37,6 +37,7 @@ public class ZKPath {
 
 
      public static String PENDING_JOB_PATH="/pending/s%/s%";//待执行的
+     public static String PENDING_JOB_NAME=PENDING_JOB_PATH+"/s%";//待执行的任务名称
 
 
      /**
@@ -84,8 +85,13 @@ public class ZKPath {
           return format(JOB_EXECUTE,jobId);
      }
 
+
      public static String getExecutionJobPath(String runId,String jobId){
           return format(EXECUTION_JOB_PATH,jobId,runId);
+     }
+
+     public static String getExecutionJobStatus(String jobId,String runId){
+          return format(EXECUTION_JOB_STATUS,jobId,runId);
      }
 
      /**
@@ -122,6 +128,10 @@ public class ZKPath {
 
      public static String getPendingJobPath(String ip,String runid){
           return format(PENDING_JOB_PATH,ip,runid);
+     }
+
+     public static String getPendingJobName(String ip,String runid,String jobName){
+          return format(PENDING_JOB_NAME,ip,runid,jobName);
      }
 
 

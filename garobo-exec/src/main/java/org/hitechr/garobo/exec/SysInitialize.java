@@ -41,7 +41,9 @@ public class SysInitialize implements ApplicationContextAware, InitializingBean 
     @Override
     public void afterPropertiesSet() throws Exception {
 
-//        startScheduler();
+        SchedulerUtils.init(zkServer,scheduler);
+
+        startScheduler();//开启任务触发的监听
 
 //        initAgentZk();
 

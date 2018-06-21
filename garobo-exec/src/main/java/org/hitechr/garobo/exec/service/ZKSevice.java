@@ -15,6 +15,9 @@ import org.hitechr.garobo.exec.common.MachineInfo;
 import org.hitechr.garobo.exec.listener.AddJobEventListener;
 import org.hitechr.garobo.exec.utils.SchedulerUtils;
 import org.hitechr.garobo.model.Job;
+import org.hitechr.garobo.zk.ChildrenCacheListener;
+import org.hitechr.garobo.zk.PathCacheListener;
+import org.hitechr.garobo.zk.ZookeeperConfiguration;
 import org.hitechr.garobo.zk.ZookeeperServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -80,6 +83,10 @@ public class ZKSevice {
         zookeeperServer.addPathChildListener(agentJobsPath,new AddJobEventListener());
     }
 
+    public void bindPathListener(String path,boolean firstCache, PathCacheListener listener){
+        zookeeperServer.addPathListener(path,firstCache,listener);
+    }
+
     /**
      * 初始化当前机器可以执行的job
      * @param machineInfo
@@ -89,7 +96,7 @@ public class ZKSevice {
          String agentJobsPath = getAgentJobsPath(ip);
         List<String> childPathList = zookeeperServer.getChildPath(agentJobsPath);
         childPathList.stream()
-                .filter(SchedulerUtils::checkRootJob)
+                .filter(SchedulerUtils::checkRootJob)//获取起始节点的任务
                 .forEach(SchedulerUtils::startJob);
     }
 
@@ -113,6 +120,10 @@ public class ZKSevice {
 
     public String getData(String jobPath) {
         return zookeeperServer.getData(jobPath);
+    }
+
+    public boolean isExisted(String path){
+        return zookeeperServer.isExisted(path);
     }
 
     public void createRunningPath(int runId, String jobId,String ip) {
@@ -141,5 +152,14 @@ public class ZKSevice {
         Map<String, String> collect = childJobList.stream().collect(Collectors.toMap(String::toString, v -> ""));
 
         zookeeperServer.createPath(collect);
+    }
+
+    public void createExecutionJobPath(String jobId,String runnid) {
+        String executePath = getExecutionJobPath(runnid,jobId);
+        zookeeperServer.createPathPer(executePath,"");
+    }
+
+    public void createPath(String path,String value) {
+        zookeeperServer.createPathPer(path,value);
     }
 }

@@ -32,6 +32,7 @@ public abstract class JobCommand implements Job {
 
     JobCommandListener jobCommandListener;
 
+
     public JobCommand(JobCommandListener jobCommandListener) {
         this.jobCommandListener = jobCommandListener;
     }
@@ -40,7 +41,7 @@ public abstract class JobCommand implements Job {
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         TaskExecutionContext taskExecutionContext=null;
         try {
-            //判断当前任务是否可以执行
+
             taskExecutionContext = new TaskExecutionContext(jobExecutionContext);
             log.info("job:{} UUID:{} start:{}",this.getClass(),taskExecutionContext.getUuid(),currentTimeMillis());
             TaskCommand taskCommand = taskExecutionContext.getTaskCommand();
@@ -50,16 +51,14 @@ public abstract class JobCommand implements Job {
             try {
 
                 boolean execute=true;
-                if(jobCommandListener!=null){
+                if(jobCommandListener!=null){ //判断当前任务是否可以执行
                     execute=jobCommandListener.before(taskCommand);
                 }
 
                 if(execute){
                     SchedulerUtils.creatRunningData(taskCommand);//创建正在运行的节点信息
                     result= execute(taskExecutionContext);
-                    if(result==taskCommand.getSuccessCode()){//如果成功则进入/result节点记录
-                        SchedulerUtils.finishTask(result,taskCommand);
-                    }
+                    SchedulerUtils.finishTask(result,taskCommand);
                 }
 
 

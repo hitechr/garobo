@@ -22,10 +22,11 @@ import org.springframework.stereotype.Component;
 
 // https://www.jianshu.com/p/b71845c142d0
 // spring boot1.5以上版本@ConfigurationProperties取消location注解后的替代方案
-//@Component
+@Component
 @ConfigurationProperties(prefix = "zookeeper")
-@Configuration
-@PropertySource("classpath:/zookeeper.properties")
+//@Configuration
+@PropertySource("zookeeper.properties")
+//@PropertySource("classpath:/zookeeper.properties")
 public class ZookeeperConfiguration {
 
     private String address;

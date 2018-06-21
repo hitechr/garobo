@@ -17,6 +17,10 @@ import org.hitechr.garobo.exec.listener.JobCommandListener;
 public class ShellJobCommand extends JobCommand {
 
 
+    public ShellJobCommand() {
+        super(null);
+    }
+
     public ShellJobCommand(JobCommandListener jobCommandListener) {
         super(jobCommandListener);
     }
@@ -25,6 +29,7 @@ public class ShellJobCommand extends JobCommand {
     public int execute(TaskExecutionContext context) {
 
 
+        System.out.println("well done!");
 
         return 0;
     }

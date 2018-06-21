@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.zookeeper.data.Stat;
 import org.hitechr.garobo.common.Constants;
 import org.hitechr.garobo.common.exceptions.JobDataException;
 import org.hitechr.garobo.exec.common.TaskCommand;
@@ -28,6 +29,7 @@ import java.util.stream.Collectors;
 
 import static org.hitechr.garobo.zk.ZKPath.*;
 import static org.hitechr.garobo.zk.ZKPath.getExecutionJobPath;
+import static org.hitechr.garobo.zk.ZKPath.getExecutionJobStatus;
 import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 
@@ -112,7 +114,7 @@ public class SchedulerUtils {
      */
     public static boolean checkRootJob(String jobName) {
         TaskCommand taskCommand = getJobData(jobName);
-        return 0==taskCommand.getOrderNum();
+        return 0==taskCommand.getFlowNum();
     }
 
     private static TaskCommand getJobData(String jobName){
@@ -141,9 +143,40 @@ public class SchedulerUtils {
         int runId = taskCommand.getRunId();
         String executeIp = taskCommand.getExecuteIp();
 
-        zkSevice.createRunningPath(runId,taskCommand.getName(),executeIp);
+        //创建任务的根节点
+        zkSevice.createExecutionJobPath(taskCommand.getName(),runId+"");
+
+        String executionJobStatus = getExecutionJobStatus(taskCommand.getName(), runId + "");
+        if(!zkSevice.isExisted(executionJobStatus)){
+            zkSevice.createRunningPath(runId,taskCommand.getName(),executeIp);
+        }else {
+            log.info("path:{} is exist",executionJobStatus);
+        }
+
+        //给status绑定监听事件
+        zkSevice.bindPathListener(executionJobStatus,false,nodeCache->{
+            String path = nodeCache.getCurrentData().getPath();
+            Stat stat = nodeCache.getCurrentData().getStat();
+            log.info("path:{} change...",path);
+            byte[] data = nodeCache.getCurrentData().getData();
+            if(!Constants.status_done.equals(new String(data))){//判断节点是否已经完成
+                log.info("path:{} is running..",path);
+                return;
+            }
+
+            //加载
 
 
+            //创建pending上的数据
+            String pendingJobPath = getPendingJobPath(executeIp,runId+"");
+            String pendingJobName = getPendingJobName(executeIp,runId+"",taskCommand.getName());
+            zkSevice.createPath(pendingJobPath,"");
+
+            //删除execution上的数据，和创建result节点上的数据
+
+
+
+        });
         return true;
     }
 

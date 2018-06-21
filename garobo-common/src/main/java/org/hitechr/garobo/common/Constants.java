@@ -17,6 +17,8 @@ public interface Constants {
     String dependent="dependent";
 
     String status_running="running";
+    String status_done="done";
+    String status_pending="pending";
 
 
     String name="name";

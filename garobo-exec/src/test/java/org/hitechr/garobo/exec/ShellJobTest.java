@@ -7,6 +7,9 @@ package org.hitechr.garobo.exec;
  * @version V1.0
  */
 
+import org.hitechr.garobo.common.Constants;
+import org.hitechr.garobo.common.utils.SerNumUtils;
+import org.hitechr.garobo.exec.common.TaskCommand;
 import org.hitechr.garobo.exec.job.ShellJobCommand;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +32,7 @@ import java.util.Map;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ShellJobTest.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration
-@ComponentScan( basePackages = {"org.hitechr.garobo.exec"})
+@ComponentScan( basePackages = {"org.hitechr.garobo.exec","org.hitechr.garobo.zk"})
 public class ShellJobTest {
 
 
@@ -52,10 +55,17 @@ public class ShellJobTest {
         String jobGroup="1";
         String desc="testOnetestOne";
         JobDataMap dataMap = new JobDataMap();
+        TaskCommand taskCommand= new TaskCommand();
+        taskCommand.setRunId(10002);
+        taskCommand.setName(jobName);
+        taskCommand.setExecuteIp("192.168.10.1");
+        dataMap.put(Constants.JOBDATA,taskCommand);
         JobDetail jobDetail = JobBuilder.newJob(ShellJobCommand.class)
+                .setJobData(dataMap)
                 .withIdentity(jobName, jobGroup)
                 .withDescription(desc)
                 .build();
+
         return jobDetail;
     }
 
@@ -86,7 +96,7 @@ public class ShellJobTest {
 
 
         try {
-            Thread.sleep(1000*10);
+            Thread.sleep(1000*1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

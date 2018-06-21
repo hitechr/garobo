@@ -7,9 +7,11 @@ package org.hitechr.garobo.zk;
  * @version V1.0
  */
 
+import org.apache.curator.framework.recipes.cache.NodeCache;
+
 /**
  * @Descriptions:
  */
 public interface PathCacheListener {
-    void changed();
+    void changed(NodeCache nodeCache);
 }

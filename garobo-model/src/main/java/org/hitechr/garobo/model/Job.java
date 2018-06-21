@@ -10,6 +10,7 @@ package org.hitechr.garobo.model;
 import java.io.Serializable;
 
 
+
 public class Job implements Serializable {
 
 
@@ -32,6 +33,8 @@ public class Job implements Serializable {
 		private String jobDesc;  
     
 		private Integer flowNum;  
+    
+		private Integer groupId;  
     
 		private Integer successCode;  
     
@@ -117,6 +120,14 @@ public class Job implements Serializable {
       
     public Integer getFlowNum() {  
         return this.flowNum;  
+    }  
+    
+    public void setGroupId(Integer groupId) {  
+        this.groupId = groupId;  
+    }  
+      
+    public Integer getGroupId() {  
+        return this.groupId;  
     }  
     
     public void setSuccessCode(Integer successCode) {  

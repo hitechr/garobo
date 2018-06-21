@@ -22,7 +22,9 @@ import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
 import org.quartz.impl.StdSchedulerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -35,8 +37,9 @@ import java.util.Date;
  */
 @SpringBootApplication
 @ComponentScan( basePackages = {"org.hitechr.garobo.exec"})
-//@EnableAutoConfiguration
+@EnableAutoConfiguration
 public class Application {
+
 
     public static void main(String[] args) {
 
@@ -53,16 +56,15 @@ public class Application {
 
 
     @Bean
-    public ZookeeperServer zookeeperServer(ZookeeperConfiguration zkConfiguration){
-//        ZookeeperServer zookeeperServer= new ZookeeperServer(zkConfiguration);
-//        return  zookeeperServer;
-        return null;
+    public ZookeeperServer zookeeperServer(ZookeeperConfiguration zookeeperConfiguration){
+        ZookeeperServer zookeeperServer= new ZookeeperServer(zookeeperConfiguration);
+        return  zookeeperServer;
     }
 
-    @Bean
+    /*@Bean
     public void initScheduler(ZKSevice zkSevice, Scheduler scheduler){
         SchedulerUtils.init(zkSevice,scheduler);
-    }
+    }*/
 
 
     @Bean

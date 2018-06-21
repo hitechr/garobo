@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.hitechr.garobo.exec.common.MachineInfo;
 import org.hitechr.garobo.exec.service.ZKSevice;
 import org.hitechr.garobo.model.Job;
+import org.hitechr.garobo.zk.ZookeeperConfiguration;
 import org.hitechr.garobo.zk.ZookeeperServer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +29,7 @@ import java.util.Date;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BaseTest.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration
-@ComponentScan( basePackages = {"org.hitechr.garobo.exec"})
+@ComponentScan( basePackages = {"org.hitechr.garobo.exec","org.hitechr.garobo.zk"})
 public class ZkServerTest  {
 
     @Autowired
@@ -41,11 +42,11 @@ public class ZkServerTest  {
     public void createJob(){
 
         Job job= new Job();
-        job.setName("job_0");
+        job.setName("job_1");
         job.setGroupId(1);
         job.setJobCron("0 0/10 * * * ? ");
         job.setJobDesc("测试程序");
-        job.setOrderNum(0);
+        job.setFlowNum(0);
 
         String jobData = JSONObject.toJSONString(job);
         String path="/jobs/"+job.getName();

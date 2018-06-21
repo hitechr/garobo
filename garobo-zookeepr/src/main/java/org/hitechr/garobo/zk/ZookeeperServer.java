@@ -136,11 +136,11 @@ public class ZookeeperServer {
      * @param path
      * @param listener
      */
-    public void addPathListener(String path,PathCacheListener listener){
+    public void addPathListener(String path,boolean firstCache,PathCacheListener listener){
         try {
             NodeCache nodeCache = new NodeCache(client,path);
-            nodeCache.start();
-            nodeCache.getListenable().addListener(()->listener.changed());
+            nodeCache.start(firstCache);
+            nodeCache.getListenable().addListener(()->listener.changed(nodeCache));
         } catch (Exception e) {
             e.printStackTrace();
             ExceptionHandler.handleException(e);
