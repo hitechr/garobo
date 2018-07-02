@@ -172,4 +172,16 @@ public class ZKSevice {
         String jobChildPath = getJobChilds(jobName);
         return this.getChildPath(jobChildPath);
     }
+
+    public List<String> getJobExecuteIp(String jobName) {
+        String jobExecute = getJobExecute(jobName);
+        return this.getChildPath(jobExecute);
+    }
+
+    public void createPendingPath(Map<String,List<String>> childJobcollect) {
+
+    }
+
+
+
 }

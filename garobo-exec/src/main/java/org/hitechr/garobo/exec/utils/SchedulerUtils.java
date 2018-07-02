@@ -162,10 +162,18 @@ public class SchedulerUtils {
             }
 
             //获取依赖当前任务的下级任务
-            List<String> childJob = zkSevice.getChildJob(taskCommand.getName());
+            List<String> childJobs = zkSevice.getChildJob(taskCommand.getName());
+            //获取子任务对应的所有执行器
+            Map<String, List<String>> childJobcollect = childJobs.stream()
+                    .collect(toMap(String::toString,zkSevice::getJobExecuteIp));
+
+            zkSevice.createPendingPath(childJobcollect);
+
+            //遍历创建
+            childJobcollect.forEach((childJob,executeIpList)->{
+
+            });
             //判断待执行节点是否已经添加完成
-
-
 
             //创建pending上的数据
             String pendingJobPath = getPendingJobPath(executeIp,runId+"");

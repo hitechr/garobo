@@ -138,7 +138,7 @@ public class ZookeeperServer {
      */
     public void addPathListener(String path,boolean firstCache,PathCacheListener listener){
         try {
-            NodeCache nodeCache = new NodeCache(client,path);
+            final NodeCache nodeCache = new NodeCache(client,path);
             nodeCache.start(firstCache);
             nodeCache.getListenable().addListener(()->listener.changed(nodeCache));
         } catch (Exception e) {
@@ -152,8 +152,8 @@ public class ZookeeperServer {
             PathChildrenCache cache = new PathChildrenCache(client, path, true);
 
             cache.start(PathChildrenCache.StartMode.POST_INITIALIZED_EVENT);
-            cache.getListenable().addListener((client,event)-> listener.change(event)
-            );
+            cache.getListenable().addListener((client,event)-> listener.change(event));
+
         } catch (Exception e) {
             e.printStackTrace();
             ExceptionHandler.handleException(e);

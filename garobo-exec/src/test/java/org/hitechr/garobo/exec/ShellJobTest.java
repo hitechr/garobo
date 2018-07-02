@@ -51,7 +51,7 @@ public class ShellJobTest {
     }
 
     public JobDetail getJobDetail(){
-        String jobName="testOne";
+        String jobName="testTwo";
         String jobGroup="1";
         String desc="testOnetestOne";
         JobDataMap dataMap = new JobDataMap();

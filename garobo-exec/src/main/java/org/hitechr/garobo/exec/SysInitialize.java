@@ -49,7 +49,7 @@ public class SysInitialize implements ApplicationContextAware, InitializingBean 
 
 //        initScheduler();
 
-//        addListener();
+        addListener();
     }
 
     /**
