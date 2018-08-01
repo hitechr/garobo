@@ -9,11 +9,9 @@ package org.hitechr.garobo.console.service;
 
 
 import org.hitechr.garobo.console.common.web.service.BaseService;
-import org.hitechr.garobo.console.model.Job;
-import org.springframework.stereotype.Service;
 
-import org.hitechr.garobo.console.vo.JobVo;
 import org.hitechr.garobo.console.model.JobExample;
+import org.springframework.stereotype.Service;
 
 @Service
 public class JobService extends BaseService<Job, JobExample> {

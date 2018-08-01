@@ -27,6 +27,8 @@ public class MachineInfo implements Serializable{
     private Integer pid;
 
     private int port;
+    //运行时的UUID
+    private String runid;
 
     private Date startDate;
 

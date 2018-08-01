@@ -12,5 +12,12 @@
     <groupId>org.hitechr.garobo</groupId>
     <artifactId>garobo-model</artifactId>
 
+    <dependencies>
+       <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <optional>true</optional>
+    </dependency>
+    </dependencies>
 
 </project>

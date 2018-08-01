@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import org.hitechr.garobo.exec.common.MachineInfo;
 import org.hitechr.garobo.exec.service.ZKSevice;
 import org.hitechr.garobo.model.Job;
-import org.hitechr.garobo.zk.ZookeeperConfiguration;
 import org.hitechr.garobo.zk.ZookeeperServer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,10 +21,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
-import java.util.List;
-import java.util.StringJoiner;
-import java.util.function.BiPredicate;
-import java.util.function.Supplier;
 
 /**
  * @Descriptions:
@@ -87,20 +82,5 @@ public class ZkServerTest  {
         }
     }
 
-    @Test
-    public void test12(){
 
-        BiPredicate<List<String>, String> contains =(list, element) -> list.contains(element);
-        BiPredicate<List<String>, String> contains2 =List::contains;
-//        BiPredicate<List<String>, String> contains3 =list::contains;
-        Supplier<Job> jobSupplier = Job::new;
-        Job job = jobSupplier.get();
-
-
-        StringJoiner sj= new StringJoiner(",");
-        sj.add("a").add("b").add("c").add("d");
-        
-
-        System.out.println(sj);
-    }
 }

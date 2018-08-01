@@ -9,6 +9,7 @@ package org.hitechr.garobo.exec;
 
 import org.hitechr.garobo.common.Constants;
 import org.hitechr.garobo.common.utils.MachineUtils;
+import org.hitechr.garobo.common.utils.SerNumUtils;
 import org.hitechr.garobo.exec.common.MachineInfo;
 import org.hitechr.garobo.exec.job.JobCommandFacory;
 import org.hitechr.garobo.exec.job.ShellJobCommand;
@@ -23,6 +24,7 @@ import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
 import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,15 +33,19 @@ import org.springframework.context.annotation.ComponentScan;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * @Descriptions: 启动程序的主类
  */
 @SpringBootApplication
-@ComponentScan( basePackages = {"org.hitechr.garobo.exec"})
+@ComponentScan( basePackages = {"org.hitechr.garobo.exec","org.hitechr.garobo.zk"})
 @EnableAutoConfiguration
 public class Application {
 
+
+    @Value("${server.port}")
+    private Integer port;
 
     public static void main(String[] args) {
 
@@ -48,11 +54,11 @@ public class Application {
 
 
 
-    @Bean
-    public Scheduler schedulerFactoryBean() throws IOException, SchedulerException {
+
+   /* public Scheduler schedulerFactoryBean() throws IOException, SchedulerException {
         SchedulerFactory factory =  new StdSchedulerFactory();
         return factory.getScheduler();
-    }
+    }*/
 
 
     @Bean
@@ -67,12 +73,12 @@ public class Application {
     }*/
 
 
-    @Bean
-    public ShellJobCommand shellJobCommand(ShellJobCommandListener shellJobCommandListener){
+
+    /*public ShellJobCommand shellJobCommand(ShellJobCommandListener shellJobCommandListener){
         ShellJobCommand shellJobCommand = new ShellJobCommand(shellJobCommandListener);
         JobCommandFacory.addJobCommand(Constants.JOB_COMMAND_TYPE_SHELL,shellJobCommand);
         return shellJobCommand;
-    }
+    }*/
 
 
     /**
@@ -82,11 +88,14 @@ public class Application {
     @Bean
     public MachineInfo initMachineInfo(){
         int pid = MachineUtils.pid();
+        String runid= SerNumUtils.uuid();
+
         MachineInfo machineInfo= new MachineInfo();
         machineInfo.setStartDate(new Date());
         machineInfo.setPid(pid);
-        machineInfo.setIp("192.168.2.12");
-        machineInfo.setPort(7789);
+        machineInfo.setIp(MachineUtils.ip());
+        machineInfo.setPort(port);
+        machineInfo.setRunid(runid);
         return machineInfo;
     }
 }

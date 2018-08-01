@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
 public class SysInitialize implements ApplicationContextAware, InitializingBean {
     private ApplicationContext applicationContext;
 
-    @Autowired
+
     private Scheduler scheduler;
 
     @Autowired
@@ -41,15 +41,15 @@ public class SysInitialize implements ApplicationContextAware, InitializingBean 
     @Override
     public void afterPropertiesSet() throws Exception {
 
-        SchedulerUtils.init(zkServer,scheduler);
+//        SchedulerUtils.init(zkServer,scheduler);
 
-        startScheduler();//开启任务触发的监听
+//        startScheduler();//开启任务触发的监听
 
-//        initAgentZk();
+        initAgentZk(); //注册当前执行器的信息到zk上
 
 //        initScheduler();
 
-        addListener();
+//        addListener();
     }
 
     /**

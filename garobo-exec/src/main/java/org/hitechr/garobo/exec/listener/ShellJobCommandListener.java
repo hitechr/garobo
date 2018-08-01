@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 /**
  * Created by ShenQi on 18/5/3.
  */
-@Component
+
 public class ShellJobCommandListener implements JobCommandListener {
 
-    @Autowired
+
     private ZKSevice zkSevice;
 
 

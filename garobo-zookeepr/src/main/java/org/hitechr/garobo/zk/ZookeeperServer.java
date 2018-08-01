@@ -140,7 +140,7 @@ public class ZookeeperServer {
         try {
             final NodeCache nodeCache = new NodeCache(client,path);
             nodeCache.start(firstCache);
-            nodeCache.getListenable().addListener(()->listener.changed(nodeCache));
+          /*  nodeCache.getListenable().addListener(()->listener.changed(nodeCache));*/
         } catch (Exception e) {
             e.printStackTrace();
             ExceptionHandler.handleException(e);
@@ -152,7 +152,7 @@ public class ZookeeperServer {
             PathChildrenCache cache = new PathChildrenCache(client, path, true);
 
             cache.start(PathChildrenCache.StartMode.POST_INITIALIZED_EVENT);
-            cache.getListenable().addListener((client,event)-> listener.change(event));
+           /* cache.getListenable().addListener((client,event)-> listener.change(event));*/
 
         } catch (Exception e) {
             e.printStackTrace();

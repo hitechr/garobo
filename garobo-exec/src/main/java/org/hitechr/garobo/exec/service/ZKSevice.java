@@ -9,15 +9,10 @@ package org.hitechr.garobo.exec.service;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.hitechr.garobo.common.Constants;
 import org.hitechr.garobo.exec.common.MachineInfo;
 import org.hitechr.garobo.exec.listener.AddJobEventListener;
-import org.hitechr.garobo.exec.utils.SchedulerUtils;
-import org.hitechr.garobo.model.Job;
-import org.hitechr.garobo.zk.ChildrenCacheListener;
 import org.hitechr.garobo.zk.PathCacheListener;
-import org.hitechr.garobo.zk.ZookeeperConfiguration;
 import org.hitechr.garobo.zk.ZookeeperServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,7 +20,6 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static org.hitechr.garobo.zk.ZKPath.*;
 
@@ -54,8 +48,8 @@ public class ZKSevice {
                 String macJson = JSONObject.toJSONString(machineInfo);
                 zookeeperServer.createPath(agentStatusPath, macJson);
 
-                String agentJobsPath = getAgentJobsPath(ip);
-                zookeeperServer.createPathPer(agentJobsPath,"");
+//                String agentJobsPath = getAgentJobsPath(ip);
+//                zookeeperServer.createPathPer(agentJobsPath,"");
             }
 
         } catch (Exception e) {
@@ -95,9 +89,9 @@ public class ZKSevice {
         String ip = machineInfo.getIp();
          String agentJobsPath = getAgentJobsPath(ip);
         List<String> childPathList = zookeeperServer.getChildPath(agentJobsPath);
-        childPathList.stream()
+        /*childPathList.stream()
                 .filter(SchedulerUtils::checkRootJob)//获取起始节点的任务
-                .forEach(SchedulerUtils::startJob);
+                .forEach(SchedulerUtils::startJob);*/
     }
 
     public  List<String> getChildPath(String agentJobsPath){
@@ -149,10 +143,10 @@ public class ZKSevice {
 
     public void createChildPath(List<String> childJobList) {
 
-        Map<String, String> collect = childJobList.stream()
+       /* Map<String, String> collect = childJobList.stream()
                 .collect(Collectors.toMap(String::toString, v -> ""));
 
-        zookeeperServer.createPath(collect);
+        zookeeperServer.createPath(collect);*/
     }
 
     public void createExecutionJobPath(String jobId,String runnid) {
@@ -179,6 +173,10 @@ public class ZKSevice {
     }
 
     public void createPendingPath(Map<String,List<String>> childJobcollect) {
+        //遍历创建
+        /*childJobcollect.forEach((childJob,executeIpList)->{
+
+        });*/
 
     }
 
