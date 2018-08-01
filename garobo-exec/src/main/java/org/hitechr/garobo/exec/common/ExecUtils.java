@@ -47,8 +47,8 @@ public class ExecUtils {
         resultHandler.setWatchdog(watchdog);
         resultHandler.setPid(pid);
 
-//        ExecuteStreamHandler stream = new PumpStreamHandler(outputStream, errorStream);
-//        executor.setStreamHandler(stream);
+        ExecuteStreamHandler stream = new PumpStreamHandler(outputStream, errorStream);
+        executor.setStreamHandler(stream);
         executor.setExitValue(0);
         resultHandler.begin();
         executor.execute(cmdLine,resultHandler);
@@ -59,26 +59,42 @@ public class ExecUtils {
     }
 
 
+    public static void maifn(String[] args) throws IOException, InterruptedException {
+
+
+        Runtime r = Runtime.getRuntime();
+
+        Process exec = r.exec("ping www.qq.com");
+        OutputStream outputStream = exec.getOutputStream();
+
+        exec.waitFor();
+        System.out.println("exec.exitValue() = " + exec.exitValue());
+
+
+    }
+
 
     public static void main(String[] args) throws IOException {
 
-        String command="ping 192.168.2.16 -t";
+        String command="ping -c 10 www.qq.com";
         CommandExecuteResultHandler commandExecuteResultHandler = new CommandExecuteResultHandler(){
             @Override
             protected void callBack(Response response) {
                 System.out.println(response);
             }
         };
-        ExecuteWatchdog watchdog = cmd("1",command, 5 * 1000, commandExecuteResultHandler);
+        ExecuteWatchdog watchdog = cmd("1",command, 20 * 1000L, commandExecuteResultHandler);
 
 
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        watchdog.destroyProcess();
-        watchdog.stop();
+//        try {
+//            Thread.sleep(2*3000L);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//
+//        kill("1");
+
+        System.out.println("watchdog.isWatching() = " + watchdog.isWatching());
 
 
 
@@ -90,6 +106,10 @@ public class ExecUtils {
         if(watchdog!=null){
             watchdog.destroyProcess();
         }
+    }
+    public static boolean watching(String pid){
+        ExecuteWatchdog executeWatchdog = DogHose.get(pid);
+        return executeWatchdog.isWatching();
     }
 
 }

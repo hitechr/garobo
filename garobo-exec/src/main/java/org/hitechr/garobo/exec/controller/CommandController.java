@@ -60,6 +60,14 @@ public class CommandController {
 
     public String cmdStatus(String pid){
 
+        if (ExecUtils.watching(pid)){
+            return "running";
+        }else {//从zk上获取结果数据
+
+
+        }
+
+
         return null;
     }
 
