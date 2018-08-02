@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class JobCommandFacory {
 
-    private static ConcurrentMap<Integer,JobCommand> commandConcurrentMap=new ConcurrentHashMap<>();
+    /*private static ConcurrentMap<Integer,JobCommand> commandConcurrentMap=new ConcurrentHashMap<>();
 
     public static Class<? extends JobCommand> commdTypeClass(Integer type) {
         return commdType(type).getClass();
@@ -27,5 +27,5 @@ public class JobCommandFacory {
     }
     public static void addJobCommand(Integer type,JobCommand jobCommand){
         commandConcurrentMap.putIfAbsent(type,jobCommand);
-    }
+    }*/
 }

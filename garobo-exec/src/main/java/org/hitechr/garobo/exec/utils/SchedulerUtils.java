@@ -29,7 +29,7 @@ import static org.quartz.TriggerBuilder.newTrigger;
 @Slf4j
 public class SchedulerUtils {
 
-    private static ZKSevice zkSevice;
+   /* private static ZKSevice zkSevice;
 
     private static Scheduler scheduler;
     private static  ThreadLocal<TaskCommand> jobThreadLocal;
@@ -79,10 +79,10 @@ public class SchedulerUtils {
         return triggerTriggerBuilder.build();
     }
 
-    /**
+    *//**
      * 开启任务的方法
      * @param jobName
-     */
+     *//*
     public static void startJob(String jobName) {
         TaskCommand taskCommand = getJobData(jobName);
 
@@ -97,11 +97,11 @@ public class SchedulerUtils {
 //        jobThreadLocal.remove();
     }
 
-    /**
+    *//**
      * 验证当前的job是否是起始job
      * @param jobName
      * @return
-     */
+     *//*
     public static boolean checkRootJob(String jobName) {
         TaskCommand taskCommand = getJobData(jobName);
         return 0==taskCommand.getFlowNum();
@@ -124,11 +124,11 @@ public class SchedulerUtils {
         return job;
     }
 
-    /**
+    *//**
      * 创造正在执行的节点信息
      * @param taskCommand
      * @return
-     */
+     *//*
     public static boolean creatRunningData(TaskCommand taskCommand){
         int runId = taskCommand.getRunId();
         String executeIp = taskCommand.getExecuteIp();
@@ -144,7 +144,7 @@ public class SchedulerUtils {
         }
 
         //给status绑定监听事件
-       /* zkSevice.bindPathListener(executionJobStatus,false,nodeCache->{
+       *//* zkSevice.bindPathListener(executionJobStatus,false,nodeCache->{
             String path = nodeCache.getCurrentData().getPath();
             Stat stat = nodeCache.getCurrentData().getStat();
             log.info("path:{} change...",path);
@@ -172,15 +172,15 @@ public class SchedulerUtils {
 
 
 
-        });*/
+        });*//*
         return true;
     }
 
-    /**
+    *//**
      * 任务执行完后的信息
      * @param result
      * @param taskCommand
-     */
+     *//*
     public static void finishTask(int result,TaskCommand taskCommand){
         int runId = taskCommand.getRunId();
         String name = taskCommand.getName();
@@ -211,35 +211,35 @@ public class SchedulerUtils {
     }
 
 
-    /**
+    *//**
      * 创建执行结果的节点
      * @param runId
      * @param depJobPaths
      * @return
-     */
+     *//*
     private static List<String> createResultJobPath(String runId,List<String> depJobPaths) {
-       /* List<String> collect = depJobPaths.stream()
+       *//* List<String> collect = depJobPaths.stream()
                 .map(depJob -> {
                     return getExecutionJobDependent(runId , depJob);
-                }).collect(toList());*/
+                }).collect(toList());*//*
         return null;
 
     }
 
 
-    /**
+    *//**
      * 创建待执行任务的节点
      * @param runnid
      * @param childJobs
      * @return
-     */
+     *//*
     private static List<String> createPendingJobPath(String runnid,List<String> childJobs) {
 
-        List<String> childJobList = null;/*childJobs.stream().map(childJob -> {
+        List<String> childJobList = null;*//*childJobs.stream().map(childJob -> {
             TaskCommand jobData = getJobData(childJob);
             String executeIp = jobData.getExecuteIp();
             return getPendingJobPath(executeIp, runnid + "");
-        }).collect(toList());*/
+        }).collect(toList());*//*
 
 
         return childJobList;
@@ -253,7 +253,7 @@ public class SchedulerUtils {
 
 
 
-    }
+    }*/
 
 
 }

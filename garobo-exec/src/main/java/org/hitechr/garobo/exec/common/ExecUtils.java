@@ -9,6 +9,7 @@ package org.hitechr.garobo.exec.common;
 
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.exec.*;
 import org.hitechr.garobo.exec.handler.CommandExecuteResultHandler;
 import org.hitechr.garobo.model.Response;
@@ -20,6 +21,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @Descriptions:
  */
+@Slf4j
 public class ExecUtils {
 
 
@@ -41,6 +43,7 @@ public class ExecUtils {
         DefaultExecutor executor = new DefaultExecutor();
 
         timeout=timeout>0?timeout:Long.MAX_VALUE;
+        log.info("pid:{} commond:{} timeout:{}",pid,command,timeout);
 
         ExecuteWatchdog watchdog = new ExecuteWatchdog(timeout);
         executor.setWatchdog(watchdog);
@@ -49,8 +52,9 @@ public class ExecUtils {
 
         ExecuteStreamHandler stream = new PumpStreamHandler(outputStream, errorStream);
         executor.setStreamHandler(stream);
-        executor.setExitValue(0);
+//        executor.setExitValue(0);
         resultHandler.begin();
+
         executor.execute(cmdLine,resultHandler);
 
         DogHose.add(pid,watchdog);
@@ -58,52 +62,11 @@ public class ExecUtils {
         return watchdog;
     }
 
-
-    public static void maifn(String[] args) throws IOException, InterruptedException {
-
-
-        Runtime r = Runtime.getRuntime();
-
-        Process exec = r.exec("ping www.qq.com");
-        OutputStream outputStream = exec.getOutputStream();
-
-        exec.waitFor();
-        System.out.println("exec.exitValue() = " + exec.exitValue());
-
-
-    }
-
-
-    public static void main(String[] args) throws IOException {
-
-        String command="ping -c 10 www.qq.com";
-        CommandExecuteResultHandler commandExecuteResultHandler = new CommandExecuteResultHandler(){
-            @Override
-            protected void callBack(Response response) {
-                System.out.println(response);
-            }
-        };
-        ExecuteWatchdog watchdog = cmd("1",command, 20 * 1000L, commandExecuteResultHandler);
-
-
-//        try {
-//            Thread.sleep(2*3000L);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//
-//        kill("1");
-
-        System.out.println("watchdog.isWatching() = " + watchdog.isWatching());
-
-
-
-    }
-
-
     public static void kill(String pid) {
         ExecuteWatchdog watchdog = DogHose.remove(pid);
+        log.info("remove watchdog:{} pid:{}",watchdog,pid);
         if(watchdog!=null){
+            log.info("destroyProcess pid:{}",pid);
             watchdog.destroyProcess();
         }
     }

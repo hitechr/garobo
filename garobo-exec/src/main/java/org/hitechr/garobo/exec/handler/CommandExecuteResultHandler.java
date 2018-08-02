@@ -7,6 +7,7 @@ package org.hitechr.garobo.exec.handler;
  * @version V1.0
  */
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.exec.*;
 import org.hitechr.garobo.exec.common.DogHose;
 import org.hitechr.garobo.model.Response;
@@ -18,6 +19,7 @@ import java.util.Date;
 /**
  * @Descriptions:
  */
+@Slf4j
 public abstract class CommandExecuteResultHandler extends DefaultExecuteResultHandler {
 
     ByteArrayOutputStream outputStream =null;
@@ -30,16 +32,20 @@ public abstract class CommandExecuteResultHandler extends DefaultExecuteResultHa
     @Override
     public void onProcessComplete(int exitValue) {
         end();
+        log.info("pid:{} success exitValue:{}",pid,exitValue);
         super.onProcessComplete(exitValue);
+
         DogHose.remove(pid);
         response.setExitValue(getExitValue());
         try {
             outputStream.flush();
-            result= outputStream.toString("GBK");
+            result= outputStream.toString("UTF-8");
+            log.info("pid:{},result:{}",pid,result);
             response.setResult(result);
             callBack(response);
         } catch (IOException e) {
             e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 
@@ -49,6 +55,7 @@ public abstract class CommandExecuteResultHandler extends DefaultExecuteResultHa
     public void onProcessFailed(ExecuteException e) {
         end();
         super.onProcessFailed(e);
+        log.info("pid:{} process failed exitValue:{}",pid,getExitValue());
         ExecuteWatchdog remove = DogHose.remove(pid);
         if(remove==null){
             result="killed!";
@@ -60,6 +67,7 @@ public abstract class CommandExecuteResultHandler extends DefaultExecuteResultHa
             result=e.getLocalizedMessage();
             response.setResult(result);
         }
+        log.info("pid:{} result:{}",pid,result);
         response.setExitValue(getExitValue());
         callBack(response);
 

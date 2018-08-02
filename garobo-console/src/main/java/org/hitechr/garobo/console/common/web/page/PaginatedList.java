@@ -135,10 +135,5 @@ public class PaginatedList<T extends Serializable> extends WrapperArrayList<T> i
         }
     }
 
-    public static void main(String[] s) {
-        PaginatedList page = new PaginatedList(1, 1000);
-        page.setTotalItem(500);
-        page.setIndex(1);
-        System.out.println(page.startRow + "=" + page.getEndRow());
-    }
+
 }

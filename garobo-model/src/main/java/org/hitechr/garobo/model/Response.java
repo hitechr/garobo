@@ -21,7 +21,6 @@ import java.util.Date;
 
 @Getter
 @Setter
-@ToString
 public class Response {
 
     private String result;
@@ -30,5 +29,22 @@ public class Response {
     private Date startDate;
     private Date endDate;
 
+    public Response() {
+    }
 
+    public Response(String result, int status) {
+        this.result = result;
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Response{" +
+                "result='" + result + '\'' +
+                ", exitValue=" + exitValue +
+                ", status=" + status +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
+    }
 }

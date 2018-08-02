@@ -14,7 +14,7 @@ import org.hitechr.garobo.exec.listener.JobCommandListener;
  * @Descriptions:
  */
 
-public class ShellJobCommand extends JobCommand {
+/*public class ShellJobCommand extends JobCommand {
 
 
     public ShellJobCommand() {
@@ -35,4 +35,4 @@ public class ShellJobCommand extends JobCommand {
     }
 
 
-}
+}*/

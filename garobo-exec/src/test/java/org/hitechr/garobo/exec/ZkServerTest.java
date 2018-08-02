@@ -7,10 +7,8 @@ package org.hitechr.garobo.exec;
  * @version V1.0
  */
 
-import com.alibaba.fastjson.JSONObject;
 import org.hitechr.garobo.exec.common.MachineInfo;
 import org.hitechr.garobo.exec.service.ZKSevice;
-import org.hitechr.garobo.model.Job;
 import org.hitechr.garobo.zk.ZookeeperServer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,7 +38,7 @@ public class ZkServerTest  {
     @Test
     public void createJob(){
 
-        Job job= new Job();
+        /*Job job= new Job();
         job.setName("job_1");
         job.setGroupId(1);
         job.setJobCron("0 0/10 * * * ? ");
@@ -58,7 +56,7 @@ public class ZkServerTest  {
             Thread.sleep(10000*1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Test

@@ -6,12 +6,7 @@ import java.util.UUID;
  * Created by zscome on 15-4-26.
  */
 public class MakeUUID {
-    public static void main(String[] args) {
-        String[] ss = getUUID(1);
-        for (int i = 0; i < ss.length; i++) {
-            System.out.println(ss[i]);
-        }
-    }
+
 
     public static String getUUID() {
         String s = UUID.randomUUID().toString();

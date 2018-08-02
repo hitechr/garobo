@@ -7,23 +7,11 @@ package org.hitechr.garobo.exec;
  * @version V1.0
  */
 
-import org.hitechr.garobo.common.Constants;
 import org.hitechr.garobo.common.utils.MachineUtils;
 import org.hitechr.garobo.common.utils.SerNumUtils;
 import org.hitechr.garobo.exec.common.MachineInfo;
-import org.hitechr.garobo.exec.job.JobCommandFacory;
-import org.hitechr.garobo.exec.job.ShellJobCommand;
-import org.hitechr.garobo.exec.listener.ShellJobCommandListener;
-import org.hitechr.garobo.exec.service.ZKSevice;
-import org.hitechr.garobo.exec.utils.SchedulerUtils;
-import org.hitechr.garobo.exec.utils.TaskControl;
 import org.hitechr.garobo.zk.ZookeeperConfiguration;
 import org.hitechr.garobo.zk.ZookeeperServer;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.SchedulerFactory;
-import org.quartz.impl.StdSchedulerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -31,9 +19,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
-import java.io.IOException;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * @Descriptions: 启动程序的主类
@@ -43,9 +29,12 @@ import java.util.UUID;
 @EnableAutoConfiguration
 public class Application {
 
-
     @Value("${server.port}")
     private Integer port;
+
+
+
+
 
     public static void main(String[] args) {
 
@@ -61,11 +50,7 @@ public class Application {
     }*/
 
 
-    @Bean
-    public ZookeeperServer zookeeperServer(ZookeeperConfiguration zookeeperConfiguration){
-        ZookeeperServer zookeeperServer= new ZookeeperServer(zookeeperConfiguration);
-        return  zookeeperServer;
-    }
+
 
     /*@Bean
     public void initScheduler(ZKSevice zkSevice, Scheduler scheduler){
@@ -79,7 +64,6 @@ public class Application {
         JobCommandFacory.addJobCommand(Constants.JOB_COMMAND_TYPE_SHELL,shellJobCommand);
         return shellJobCommand;
     }*/
-
 
     /**
      * 初始化机器 信息
@@ -98,4 +82,11 @@ public class Application {
         machineInfo.setRunid(runid);
         return machineInfo;
     }
+
+    @Bean
+    public ZookeeperServer zookeeperServer(ZookeeperConfiguration zookeeperConfiguration){
+        ZookeeperServer zookeeperServer= new ZookeeperServer(zookeeperConfiguration);
+        return  zookeeperServer;
+    }
+
 }

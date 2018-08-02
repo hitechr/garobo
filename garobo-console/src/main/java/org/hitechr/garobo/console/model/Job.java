@@ -5,10 +5,9 @@
  * Since 2008 - 2018
  */
 
-package org.hitechr.garobo.model;
+package org.hitechr.garobo.console.model;
 
 import java.io.Serializable;
-
 
 
 public class Job implements Serializable {

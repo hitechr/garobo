@@ -8,7 +8,6 @@ package org.hitechr.garobo.console.web;
  */
 
 import org.hitechr.garobo.console.service.JobService;
-import org.hitechr.garobo.model.Job;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

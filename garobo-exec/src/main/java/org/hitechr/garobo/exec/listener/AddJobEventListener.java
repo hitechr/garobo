@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 /**
  * @Descriptions: 当job有被指定到当前机器时触发的事件
  */
-@Slf4j
+/*@Slf4j
 public class AddJobEventListener  extends ChildrenCacheListener {
     @Override
     protected void removeChild(ChildData data) {
@@ -32,4 +32,4 @@ public class AddJobEventListener  extends ChildrenCacheListener {
     protected void addChild(ChildData data) {
         log.info("add "+data.getPath()+" "+new String(data.getData()));
     }
-}
+}*/

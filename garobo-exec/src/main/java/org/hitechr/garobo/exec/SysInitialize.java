@@ -8,34 +8,47 @@ package org.hitechr.garobo.exec;
  */
 
 import lombok.extern.slf4j.Slf4j;
+import org.hitechr.garobo.common.utils.MachineUtils;
+import org.hitechr.garobo.common.utils.SerNumUtils;
 import org.hitechr.garobo.exec.common.MachineInfo;
+import org.hitechr.garobo.exec.handler.SecurityHandlerInterceptor;
 import org.hitechr.garobo.exec.service.ZKSevice;
 import org.hitechr.garobo.exec.utils.SchedulerUtils;
+import org.hitechr.garobo.zk.ZookeeperConfiguration;
+import org.hitechr.garobo.zk.ZookeeperServer;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import java.util.Date;
 
 /**
  * @Descriptions: 系统 启动初始化工作
  */
 @Component
 @Slf4j
-public class SysInitialize implements ApplicationContextAware, InitializingBean {
+@Configuration
+public class SysInitialize extends WebMvcConfigurerAdapter implements ApplicationContextAware, InitializingBean {
     private ApplicationContext applicationContext;
 
 
-    private Scheduler scheduler;
 
     @Autowired
     private ZKSevice zkServer;
 
     @Autowired
     private MachineInfo machineInfo;
+
 
 
     @Override
@@ -68,7 +81,7 @@ public class SysInitialize implements ApplicationContextAware, InitializingBean 
         /**
          * 添加jobs节点的监听事件，当有任务任务指定到这个节点时进行注册
          */
-        zkServer.watchJobListener(machineInfo);
+//        zkServer.watchJobListener(machineInfo);
 
     }
 
@@ -80,17 +93,7 @@ public class SysInitialize implements ApplicationContextAware, InitializingBean 
         zkServer.register(machineInfo);
     }
 
-    /**
-     * 启动scheduler
-     */
-    private void startScheduler() {
-        try {
-            log.info("start scheduler....");
-            scheduler.start();
-        } catch (SchedulerException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -98,6 +101,13 @@ public class SysInitialize implements ApplicationContextAware, InitializingBean 
     }
 
 
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        SecurityHandlerInterceptor securityHandlerInterceptor = new SecurityHandlerInterceptor();
+        securityHandlerInterceptor.setMachineInfo(machineInfo);
+        registry.addInterceptor(securityHandlerInterceptor)
+                .addPathPatterns("/cmd/*");
+    }
 
 
 }

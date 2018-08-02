@@ -26,7 +26,7 @@ import static org.hitechr.garobo.common.utils.DateUtils.currentTimeMillis;
 /**
  * @Descriptions: 通用抽象的执行方法
  */
-@Slf4j
+/*@Slf4j
 public abstract class JobCommand implements Job {
 
 
@@ -78,4 +78,4 @@ public abstract class JobCommand implements Job {
 
 
     public abstract int execute(TaskExecutionContext context);
-}
+}*/

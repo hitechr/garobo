@@ -10,6 +10,7 @@ package org.hitechr.garobo.console.service;
 
 import org.hitechr.garobo.console.common.web.service.BaseService;
 
+import org.hitechr.garobo.console.model.Job;
 import org.hitechr.garobo.console.model.JobExample;
 import org.springframework.stereotype.Service;
 

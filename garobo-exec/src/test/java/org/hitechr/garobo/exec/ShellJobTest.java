@@ -7,10 +7,6 @@ package org.hitechr.garobo.exec;
  * @version V1.0
  */
 
-import org.hitechr.garobo.common.Constants;
-import org.hitechr.garobo.common.utils.SerNumUtils;
-import org.hitechr.garobo.exec.common.TaskCommand;
-import org.hitechr.garobo.exec.job.ShellJobCommand;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,13 +14,8 @@ import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @Descriptions:
@@ -51,7 +42,7 @@ public class ShellJobTest {
     }
 
     public JobDetail getJobDetail(){
-        String jobName="testTwo";
+       /* String jobName="testTwo";
         String jobGroup="1";
         String desc="testOnetestOne";
         JobDataMap dataMap = new JobDataMap();
@@ -66,7 +57,8 @@ public class ShellJobTest {
                 .withDescription(desc)
                 .build();
 
-        return jobDetail;
+        return jobDetail;*/
+       return null;
     }
 
     public Trigger setTrigger(JobDetail jobDetail){

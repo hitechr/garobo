@@ -21,11 +21,11 @@ import java.io.IOException;
  */
 @RestController
 @RequestMapping("/cmd")
-public class CommandController {
+public class CommandController extends BaseController{
 
 //    @RequestMapping(value ="execute", method = RequestMethod.GET )
-    @GetMapping("/execute")
-    public String cmd(String pid,String commond,Long timeout){
+    @PostMapping("/execute")
+    public Response cmd(String pid,String commond,Long timeout){
 
         try {
             ExecuteWatchdog cmd = ExecUtils.cmd(pid,commond, timeout, new CommandExecuteResultHandler() {
@@ -37,10 +37,10 @@ public class CommandController {
             System.out.println(pid+" "+cmd.toString());
         } catch (IOException e) {
             e.printStackTrace();
-            return "error";
+            return errorResponse(e.getMessage());
         }
 
-        return "success";
+        return successResponse("成功");
     }
 
 
@@ -49,19 +49,19 @@ public class CommandController {
      * @param pid
      * @return
      */
-    @GetMapping("/kill")
-    public String kill(String pid){
+    @PostMapping("/kill")
+    public Response kill(String pid){
 
         ExecUtils.kill(pid);
 
 //        watchdog.stop();
-        return "success";
+        return successResponse("成功");
     }
 
-    public String cmdStatus(String pid){
+    public Response cmdStatus(String pid){
 
         if (ExecUtils.watching(pid)){
-            return "running";
+            return successResponse("Running");
         }else {//从zk上获取结果数据
 
 

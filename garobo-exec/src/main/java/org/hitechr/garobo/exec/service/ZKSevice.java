@@ -11,7 +11,7 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.hitechr.garobo.common.Constants;
 import org.hitechr.garobo.exec.common.MachineInfo;
-import org.hitechr.garobo.exec.listener.AddJobEventListener;
+
 import org.hitechr.garobo.zk.PathCacheListener;
 import org.hitechr.garobo.zk.ZookeeperServer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,11 +71,11 @@ public class ZKSevice {
     }
 
 
-    public void watchJobListener(MachineInfo machineInfo) {
+   /* public void watchJobListener(MachineInfo machineInfo) {
         String ip = machineInfo.getIp();
         String agentJobsPath = getAgentJobsPath(ip);
         zookeeperServer.addPathChildListener(agentJobsPath,new AddJobEventListener());
-    }
+    }*/
 
     public void bindPathListener(String path,boolean firstCache, PathCacheListener listener){
         zookeeperServer.addPathListener(path,firstCache,listener);

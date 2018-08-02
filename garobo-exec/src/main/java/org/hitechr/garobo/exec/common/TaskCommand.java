@@ -6,7 +6,6 @@ package org.hitechr.garobo.exec.common;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hitechr.garobo.model.Job;
 
 import java.util.Date;
 
@@ -15,7 +14,7 @@ import java.util.Date;
  */
 @Setter
 @Getter
-public class TaskCommand extends Job{
+public class TaskCommand {
 
 
 
