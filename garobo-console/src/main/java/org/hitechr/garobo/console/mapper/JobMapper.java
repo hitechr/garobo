@@ -18,5 +18,6 @@ import org.hitechr.garobo.console.model.JobExample;
 
 @Repository
 public interface JobMapper extends BaseMapper<Job, JobExample> {
-	
+
+
 }

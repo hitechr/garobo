@@ -8,29 +8,18 @@ package org.hitechr.garobo.exec;
  */
 
 import lombok.extern.slf4j.Slf4j;
-import org.hitechr.garobo.common.utils.MachineUtils;
-import org.hitechr.garobo.common.utils.SerNumUtils;
-import org.hitechr.garobo.exec.common.MachineInfo;
+import org.hitechr.garobo.common.MachineInfo;
 import org.hitechr.garobo.exec.handler.SecurityHandlerInterceptor;
 import org.hitechr.garobo.exec.service.ZKSevice;
-import org.hitechr.garobo.exec.utils.SchedulerUtils;
-import org.hitechr.garobo.zk.ZookeeperConfiguration;
-import org.hitechr.garobo.zk.ZookeeperServer;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-import java.util.Date;
 
 /**
  * @Descriptions: 系统 启动初始化工作
@@ -108,6 +97,4 @@ public class SysInitialize extends WebMvcConfigurerAdapter implements Applicatio
         registry.addInterceptor(securityHandlerInterceptor)
                 .addPathPatterns("/cmd/*");
     }
-
-
 }

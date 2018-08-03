@@ -13,6 +13,8 @@ package org.hitechr.garobo.zk;
 public class ZKPath {
 
 
+     private static String CONSOLE_PATH="/console/%s";
+     private static String CONSOLE_STATUS=CONSOLE_PATH+"/status";//console 状态
 
      private static String AGENT_PATH  ="/executer/%s";//agent的注册地址
      private static String AGENT_STATUS=AGENT_PATH+"/status";//agent 状态
@@ -56,6 +58,10 @@ public class ZKPath {
       */
      public static String getAgentStatusPath(String ip){
           return format(AGENT_STATUS,ip);
+     }
+
+     public static String getConsoleStatusPath(String ip){
+          return format(CONSOLE_STATUS,ip);
      }
 
      /**

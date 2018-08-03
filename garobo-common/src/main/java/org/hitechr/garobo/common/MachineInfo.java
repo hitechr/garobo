@@ -1,4 +1,4 @@
-package org.hitechr.garobo.exec.common;
+package org.hitechr.garobo.common;
 /**
  * @Package org.hitechr.garobo.common.utils
  * @Title: MachineUtils
@@ -29,6 +29,9 @@ public class MachineInfo implements Serializable{
     private int port;
     //运行时的UUID
     private String runid;
+
+    //当前机器类型
+    private String type;
 
     private Date startDate;
 

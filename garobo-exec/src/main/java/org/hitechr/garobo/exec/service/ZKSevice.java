@@ -10,8 +10,8 @@ package org.hitechr.garobo.exec.service;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.hitechr.garobo.common.Constants;
-import org.hitechr.garobo.exec.common.MachineInfo;
 
+import org.hitechr.garobo.common.MachineInfo;
 import org.hitechr.garobo.zk.PathCacheListener;
 import org.hitechr.garobo.zk.ZookeeperServer;
 import org.springframework.beans.factory.annotation.Autowired;

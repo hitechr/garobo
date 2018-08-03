@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
-"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 
 <!-- 存放手写的sql -->
 <mapper namespace="org.hitechr.garobo.console.mapper.JobExecuterMapper">
+
+
+    <!-- 批量保存job和执行器的记录关系 -->
+    <insert id="saveRelation" >
+        INSERT INTO `g_job_executer` (`exec_id`, `job_id`, `group_id`, `status`)
+       VALUES
+       <foreach collection="execIds" item="execId" separator=",">
+           (#{execId,jdbcType=INTEGER}, #{jobId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, 1)
+       </foreach>
+    </insert>
 	
 </mapper>

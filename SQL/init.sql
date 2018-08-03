@@ -17,6 +17,8 @@ CREATE TABLE `g_job` (
   `weight` TINYINT(3) NOT NULL COMMENT '任务权重',
   `redo` INT(10) NOT NULL COMMENT '重试次数',
   `redo_now` INT(2) NOT NULL COMMENT '是否立即重试',
+  `alarmCode` int(10) DEFAULT NULL COMMENT '通知码',
+  `time_out` int(10) DEFAULT NULL COMMENT '超时时间',
   `insert_date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `udate_date` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '最后更新时间',
   PRIMARY KEY (`id`),

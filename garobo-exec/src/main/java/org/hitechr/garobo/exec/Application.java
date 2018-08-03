@@ -7,9 +7,9 @@ package org.hitechr.garobo.exec;
  * @version V1.0
  */
 
+import org.hitechr.garobo.common.MachineInfo;
 import org.hitechr.garobo.common.utils.MachineUtils;
 import org.hitechr.garobo.common.utils.SerNumUtils;
-import org.hitechr.garobo.exec.common.MachineInfo;
 import org.hitechr.garobo.zk.ZookeeperConfiguration;
 import org.hitechr.garobo.zk.ZookeeperServer;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +26,6 @@ import java.util.Date;
  */
 @SpringBootApplication
 @ComponentScan( basePackages = {"org.hitechr.garobo.exec","org.hitechr.garobo.zk"})
-@EnableAutoConfiguration
 public class Application {
 
     @Value("${server.port}")
@@ -80,6 +79,7 @@ public class Application {
         machineInfo.setIp(MachineUtils.ip());
         machineInfo.setPort(port);
         machineInfo.setRunid(runid);
+        machineInfo.setType("executer");
         return machineInfo;
     }
 
