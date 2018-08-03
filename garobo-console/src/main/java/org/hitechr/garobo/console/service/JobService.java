@@ -47,6 +47,7 @@ public class JobService extends BaseService<Job, JobExample> {
         //如果都保存成功了，则添加到内存里，等待自动触发
 
 
+
     }
 
 

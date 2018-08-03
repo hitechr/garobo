@@ -10,9 +10,14 @@ package org.hitechr.garobo.console;
 import org.hitechr.garobo.common.MachineInfo;
 import org.hitechr.garobo.common.utils.MachineUtils;
 import org.hitechr.garobo.common.utils.SerNumUtils;
+import org.hitechr.garobo.console.scheduler.SchedulerManager;
 import org.hitechr.garobo.zk.ZookeeperConfiguration;
 import org.hitechr.garobo.zk.ZookeeperServer;
 import org.mybatis.spring.annotation.MapperScan;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.SchedulerFactory;
+import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -20,6 +25,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -56,6 +62,23 @@ public class Application  {
     public ZookeeperServer zookeeperServer(ZookeeperConfiguration zookeeperConfiguration){
         ZookeeperServer zookeeperServer= new ZookeeperServer(zookeeperConfiguration);
         return  zookeeperServer;
+    }
+
+
+    @Bean
+    public Scheduler schedulerFactoryBean() throws SchedulerException {
+        SchedulerFactory factory =  new StdSchedulerFactory();
+        return factory.getScheduler();
+    }
+
+    /**
+     * 定义job管理器
+     * @param scheduler
+     * @return
+     */
+    @Bean
+    public SchedulerManager schedulerManager(Scheduler scheduler){
+        return new SchedulerManager(scheduler);
     }
 
 
