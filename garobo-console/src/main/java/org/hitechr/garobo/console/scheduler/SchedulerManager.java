@@ -10,6 +10,8 @@ package org.hitechr.garobo.console.scheduler;
 import org.hitechr.garobo.console.vo.JobVo;
 import org.quartz.*;
 
+import java.util.Date;
+
 /**
  * @Descriptions: job管理，包括添加，暂停，删除
  * @from  https://blog.csdn.net/fantasic_van/article/details/74942062
@@ -36,6 +38,15 @@ public class SchedulerManager {
      * @param jobBean
      */
     public void modifyJobTime(JobBean jobBean){
+        JobKey jobKey = JobKey.jobKey(jobBean.getJobName(), jobBean.getJobGroup());
+        try {
+            if(!scheduler.checkExists(jobKey)){
+                return;
+            }
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+
         modifyJobTime(jobBean.getTriggerName(),jobBean.getTriggerGroup(),jobBean.getCron());
     }
 
@@ -44,6 +55,14 @@ public class SchedulerManager {
      * @param jobBean
      */
     public void removeJob(JobBean jobBean){
+        JobKey jobKey = JobKey.jobKey(jobBean.getJobName(), jobBean.getJobGroup());
+        try {
+            if(!scheduler.checkExists(jobKey)){
+                return;
+            }
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
         removeJob(jobBean.getJobName(),jobBean.getJobGroup(),jobBean.getTriggerName(),jobBean.getTriggerGroup());
     }
 
@@ -117,15 +136,21 @@ public class SchedulerManager {
             TriggerBuilder<Trigger> triggerBuilder =   TriggerBuilder.newTrigger();
             // 触发器名,触发器组
             triggerBuilder.withIdentity(triggerName, triggerGroupName);
+
             //立即触发任务
             triggerBuilder.startNow();
             // 触发器时间设定
-            triggerBuilder.withSchedule(CronScheduleBuilder.cronSchedule(cron));
+
+
+            triggerBuilder.withSchedule(CronScheduleBuilder
+                                            .cronSchedule(cron)
+                                            .withMisfireHandlingInstructionDoNothing());//不触发立即执行
             // 创建Trigger对象
             CronTrigger trigger = (CronTrigger) triggerBuilder.build();
 
+
             // 调度容器设置JobDetail和Trigger
-            scheduler.scheduleJob(jobDetail, trigger);
+            Date date = scheduler.scheduleJob(jobDetail, trigger);
 
             // 启动
             if (!scheduler.isShutdown()) {

@@ -8,6 +8,7 @@ package org.hitechr.garobo.console.scheduler;
  */
 
 import lombok.extern.slf4j.Slf4j;
+import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -19,6 +20,8 @@ import java.util.Date;
  * @Descriptions:
  */
 @Slf4j
+// 同一时间将只有一个Job实例被执行, 为了避免并发问题导致数据紊乱
+@DisallowConcurrentExecution
 public class ExecuteJob implements Job {
 
 
