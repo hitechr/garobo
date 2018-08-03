@@ -9,6 +9,7 @@ package org.hitechr.garobo.zk;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -19,20 +20,21 @@ import org.springframework.stereotype.Component;
  */
 @Setter
 @Getter
-
 // https://www.jianshu.com/p/b71845c142d0
 // spring boot1.5以上版本@ConfigurationProperties取消location注解后的替代方案
 @Component
-@ConfigurationProperties(prefix = "zookeeper")
-//@Configuration
-@PropertySource("zookeeper.properties")
+//@ConfigurationProperties(prefix = "zookeeper")
+@Configuration
+//@PropertySource("zookeeper.properties")
 //@PropertySource("classpath:/zookeeper.properties")
 public class ZookeeperConfiguration {
 
+    @Value("${garobo.zk.address}")
     private String address;
     /**
      * 命名空间.
      */
+    @Value("${garobo.zk.namespace}")
     private String namespace;
 
     public ZookeeperConfiguration() {
@@ -46,18 +48,22 @@ public class ZookeeperConfiguration {
     /**
      * 会话超时时间(MS)
      */
+    @Value("${garobo.zk.sessionTimeout}")
     private int sessionTimeout=1000*5;
     /**
      * //连接超时时间(MS)
      */
+    @Value("${garobo.zk.connectionTimeout}")
     private int connectionTimeout=1000*5;
     /**
      * //重试时间间隔(MS)
      */
+    @Value("${garobo.zk.sleepBetweenRetries}")
     private int sleepBetweenRetries=1000*3;
     /**
      * //重试次数
      */
+    @Value("${garobo.zk.maxRetries}")
     private int maxRetries=3;
 
 }

@@ -22,7 +22,6 @@ public class MachineUtils {
      */
     public static int pid(){
         String name = ManagementFactory.getRuntimeMXBean().getName();
-        System.out.println(name);
         String pid = name.split("@")[0];
         return Integer.parseInt(pid);
     }
