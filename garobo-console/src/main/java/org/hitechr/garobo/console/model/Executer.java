@@ -22,6 +22,8 @@ public class Executer implements Serializable {
     
 		private Integer status;  
     
+		private String rid;  
+    
 		private java.util.Date insertDate;  
     
 		private java.util.Date udateDate;  
@@ -50,6 +52,14 @@ public class Executer implements Serializable {
       
     public Integer getStatus() {  
         return this.status;  
+    }  
+    
+    public void setRid(String rid) {  
+        this.rid = rid;  
+    }  
+      
+    public String getRid() {  
+        return this.rid;  
     }  
     
     public void setInsertDate(java.util.Date insertDate) {  

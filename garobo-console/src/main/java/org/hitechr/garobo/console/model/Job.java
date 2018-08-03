@@ -10,6 +10,7 @@ package org.hitechr.garobo.console.model;
 import java.io.Serializable;
 
 
+
 public class Job implements Serializable {
 
 
@@ -41,7 +42,7 @@ public class Job implements Serializable {
     
 		private Integer redo;  
     
-		private Integer redoGap;  
+		private Integer redoNow;  
     
 		private java.util.Date insertDate;  
     
@@ -153,12 +154,12 @@ public class Job implements Serializable {
         return this.redo;  
     }  
     
-    public void setRedoGap(Integer redoGap) {  
-        this.redoGap = redoGap;  
+    public void setRedoNow(Integer redoNow) {  
+        this.redoNow = redoNow;  
     }  
       
-    public Integer getRedoGap() {  
-        return this.redoGap;  
+    public Integer getRedoNow() {  
+        return this.redoNow;  
     }  
     
     public void setInsertDate(java.util.Date insertDate) {  

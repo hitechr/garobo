@@ -9,6 +9,7 @@
 			<result property="id" column="id"/>
 			<result property="execId" column="exec_id"/>
 			<result property="jobId" column="job_id"/>
+			<result property="groupId" column="group_id"/>
 			<result property="status" column="status"/>
 			<result property="insertDate" column="insert_date"/>
 			<result property="udateDate" column="udate_date"/>
@@ -93,6 +94,7 @@
 		id,
 		exec_id,
 		job_id,
+		group_id,
 		status,
 		insert_date,
 		udate_date
@@ -106,6 +108,7 @@
     -->
 		exec_id,
 		job_id,
+		group_id,
 		status,
 		insert_date,
 		udate_date
@@ -193,6 +196,7 @@
     values (
 			#{execId} ,
 			#{jobId} ,
+			#{groupId} ,
 			#{status} ,
 			#{insertDate} ,
 			#{udateDate} 
@@ -212,6 +216,7 @@
 		<if test="id != null" >id</if> ,
 		<if test="execId != null" >exec_id</if> ,
 		<if test="jobId != null" >job_id</if> ,
+		<if test="groupId != null" >group_id</if> ,
 		<if test="status != null" >status</if> ,
 		<if test="insertDate != null" >insert_date</if> ,
 		<if test="udateDate != null" >udate_date</if> 
@@ -221,6 +226,7 @@
 		<if test="id != null" >#{id}</if>,
 		<if test="execId != null" >#{execId}</if>,
 		<if test="jobId != null" >#{jobId}</if>,
+		<if test="groupId != null" >#{groupId}</if>,
 		<if test="status != null" >#{status}</if>,
 		<if test="insertDate != null" >#{insertDate}</if>,
 		<if test="udateDate != null" >#{udateDate}</if>
@@ -256,6 +262,9 @@
 			<if test="record.job_id != null" >
 				job_id = #{jobId} ,
 			</if>
+			<if test="record.group_id != null" >
+				group_id = #{groupId} ,
+			</if>
 			<if test="record.status != null" >
 				status = #{status} ,
 			</if>
@@ -283,6 +292,7 @@
     set 
 		exec_id = #{execId} ,
 		job_id = #{jobId} ,
+		group_id = #{groupId} ,
 		status = #{status} ,
 		insert_date = #{insertDate} ,
 		udate_date = #{udateDate} 
@@ -304,6 +314,9 @@
 		  </if>
 		  <if test="job_id != null" >
 			job_id = #{jobId} ,
+		  </if>
+		  <if test="group_id != null" >
+			group_id = #{groupId} ,
 		  </if>
 		  <if test="status != null" >
 			status = #{status} ,
@@ -332,6 +345,9 @@
 	  </if>
 	  <if test="job_id != null" >
 		job_id = #{jobId} ,
+	  </if>
+	  <if test="group_id != null" >
+		group_id = #{groupId} ,
 	  </if>
 	  <if test="status != null" >
 		status = #{status} ,

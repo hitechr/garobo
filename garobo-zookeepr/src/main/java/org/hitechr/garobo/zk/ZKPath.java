@@ -14,7 +14,7 @@ public class ZKPath {
 
 
 
-     private static String AGENT_PATH  ="/agent/%s";//agent的注册地址
+     private static String AGENT_PATH  ="/executer/%s";//agent的注册地址
      private static String AGENT_STATUS=AGENT_PATH+"/status";//agent 状态
      private static String AGET_JOBS=AGENT_PATH+"/jobs";//添加到这个机器运行的任务
 

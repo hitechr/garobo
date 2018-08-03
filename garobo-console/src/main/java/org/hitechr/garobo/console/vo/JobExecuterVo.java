@@ -6,7 +6,7 @@
  */
 
 
-package org.hitechr.garobo.console.vo;
+package  org.hitechr.garobo.console.vo;
 
 import  org.hitechr.garobo.console.model.JobExecuter;
 

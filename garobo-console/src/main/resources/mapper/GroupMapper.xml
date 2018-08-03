@@ -9,7 +9,6 @@
 			<result property="id" column="id"/>
 			<result property="name" column="name"/>
 			<result property="desc" column="desc"/>
-			<result property="runId" column="runId"/>
 			<result property="version" column="version"/>
 			<result property="insertDate" column="insert_date"/>
 			<result property="udateDate" column="udate_date"/>
@@ -94,7 +93,6 @@
 		id,
 		name,
 		desc,
-		runId,
 		version,
 		insert_date,
 		udate_date
@@ -108,7 +106,6 @@
     -->
 		name,
 		desc,
-		runId,
 		version,
 		insert_date,
 		udate_date
@@ -196,7 +193,6 @@
     values (
 			#{name} ,
 			#{desc} ,
-			#{runId} ,
 			#{version} ,
 			#{insertDate} ,
 			#{udateDate} 
@@ -216,7 +212,6 @@
 		<if test="id != null" >id</if> ,
 		<if test="name != null" >name</if> ,
 		<if test="desc != null" >desc</if> ,
-		<if test="runId != null" >runId</if> ,
 		<if test="version != null" >version</if> ,
 		<if test="insertDate != null" >insert_date</if> ,
 		<if test="udateDate != null" >udate_date</if> 
@@ -226,7 +221,6 @@
 		<if test="id != null" >#{id}</if>,
 		<if test="name != null" >#{name}</if>,
 		<if test="desc != null" >#{desc}</if>,
-		<if test="runId != null" >#{runId}</if>,
 		<if test="version != null" >#{version}</if>,
 		<if test="insertDate != null" >#{insertDate}</if>,
 		<if test="udateDate != null" >#{udateDate}</if>
@@ -262,9 +256,6 @@
 			<if test="record.desc != null" >
 				desc = #{desc} ,
 			</if>
-			<if test="record.runId != null" >
-				runId = #{runId} ,
-			</if>
 			<if test="record.version != null" >
 				version = #{version} ,
 			</if>
@@ -292,7 +283,6 @@
     set 
 		name = #{name} ,
 		desc = #{desc} ,
-		runId = #{runId} ,
 		version = #{version} ,
 		insert_date = #{insertDate} ,
 		udate_date = #{udateDate} 
@@ -314,9 +304,6 @@
 		  </if>
 		  <if test="desc != null" >
 			desc = #{desc} ,
-		  </if>
-		  <if test="runId != null" >
-			runId = #{runId} ,
 		  </if>
 		  <if test="version != null" >
 			version = #{version} ,
@@ -345,9 +332,6 @@
 	  </if>
 	  <if test="desc != null" >
 		desc = #{desc} ,
-	  </if>
-	  <if test="runId != null" >
-		runId = #{runId} ,
 	  </if>
 	  <if test="version != null" >
 		version = #{version} ,

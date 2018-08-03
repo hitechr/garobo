@@ -10,9 +10,9 @@ package org.hitechr.garobo.console.mapper;
 
 
 import org.hitechr.garobo.console.common.web.dao.BaseMapper;
-import org.hitechr.garobo.console.model.Job;
 import org.springframework.stereotype.Repository;
 
+import org.hitechr.garobo.console.model.Job;
 import org.hitechr.garobo.console.model.JobExample;
 
 

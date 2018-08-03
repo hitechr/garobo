@@ -6,12 +6,13 @@
  */
 
 
-package org.hitechr.garobo.console.vo;
+package  org.hitechr.garobo.console.vo;
+
+import  org.hitechr.garobo.console.model.Job;
 
 
-import org.hitechr.garobo.console.model.Job;
 
-public class  JobVo extends Job {
+public class  JobVo extends  Job {
 
 	
 

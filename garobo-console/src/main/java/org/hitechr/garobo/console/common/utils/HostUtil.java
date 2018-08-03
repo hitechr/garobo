@@ -25,4 +25,7 @@ public class HostUtil {
         }
     }
 
+    public static void main(String args[]){
+        System.out.println(getLoclServerIp());
+    }
 }

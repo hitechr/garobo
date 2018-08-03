@@ -19,7 +19,7 @@
 			<result property="successCode" column="success_code"/>
 			<result property="weight" column="weight"/>
 			<result property="redo" column="redo"/>
-			<result property="redoGap" column="redo_gap"/>
+			<result property="redoNow" column="redo_now"/>
 			<result property="insertDate" column="insert_date"/>
 			<result property="udateDate" column="udate_date"/>
 	</resultMap>
@@ -113,7 +113,7 @@
 		success_code,
 		weight,
 		redo,
-		redo_gap,
+		redo_now,
 		insert_date,
 		udate_date
   </sql>
@@ -136,7 +136,7 @@
 		success_code,
 		weight,
 		redo,
-		redo_gap,
+		redo_now,
 		insert_date,
 		udate_date
   </sql>
@@ -233,7 +233,7 @@
 			#{successCode} ,
 			#{weight} ,
 			#{redo} ,
-			#{redoGap} ,
+			#{redoNow} ,
 			#{insertDate} ,
 			#{udateDate} 
       )
@@ -262,7 +262,7 @@
 		<if test="successCode != null" >success_code</if> ,
 		<if test="weight != null" >weight</if> ,
 		<if test="redo != null" >redo</if> ,
-		<if test="redoGap != null" >redo_gap</if> ,
+		<if test="redoNow != null" >redo_now</if> ,
 		<if test="insertDate != null" >insert_date</if> ,
 		<if test="udateDate != null" >udate_date</if> 
     </trim>
@@ -281,7 +281,7 @@
 		<if test="successCode != null" >#{successCode}</if>,
 		<if test="weight != null" >#{weight}</if>,
 		<if test="redo != null" >#{redo}</if>,
-		<if test="redoGap != null" >#{redoGap}</if>,
+		<if test="redoNow != null" >#{redoNow}</if>,
 		<if test="insertDate != null" >#{insertDate}</if>,
 		<if test="udateDate != null" >#{udateDate}</if>
     </trim>
@@ -346,8 +346,8 @@
 			<if test="record.redo != null" >
 				redo = #{redo} ,
 			</if>
-			<if test="record.redo_gap != null" >
-				redo_gap = #{redoGap} ,
+			<if test="record.redo_now != null" >
+				redo_now = #{redoNow} ,
 			</if>
 			<if test="record.insert_date != null" >
 				insert_date = #{insertDate} ,
@@ -383,7 +383,7 @@
 		success_code = #{successCode} ,
 		weight = #{weight} ,
 		redo = #{redo} ,
-		redo_gap = #{redoGap} ,
+		redo_now = #{redoNow} ,
 		insert_date = #{insertDate} ,
 		udate_date = #{udateDate} 
     <if test="_parameter != null" >
@@ -435,8 +435,8 @@
 		  <if test="redo != null" >
 			redo = #{redo} ,
 		  </if>
-		  <if test="redo_gap != null" >
-			redo_gap = #{redoGap} ,
+		  <if test="redo_now != null" >
+			redo_now = #{redoNow} ,
 		  </if>
 		  <if test="insert_date != null" >
 			insert_date = #{insertDate} ,
@@ -493,8 +493,8 @@
 	  <if test="redo != null" >
 		redo = #{redo} ,
 	  </if>
-	  <if test="redo_gap != null" >
-		redo_gap = #{redoGap} ,
+	  <if test="redo_now != null" >
+		redo_now = #{redoNow} ,
 	  </if>
 	  <if test="insert_date != null" >
 		insert_date = #{insertDate} ,

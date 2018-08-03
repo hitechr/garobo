@@ -9,6 +9,7 @@
 			<result property="id" column="id"/>
 			<result property="ip" column="ip"/>
 			<result property="status" column="status"/>
+			<result property="rid" column="rid"/>
 			<result property="insertDate" column="insert_date"/>
 			<result property="udateDate" column="udate_date"/>
 	</resultMap>
@@ -92,6 +93,7 @@
 		id,
 		ip,
 		status,
+		rid,
 		insert_date,
 		udate_date
   </sql>
@@ -104,6 +106,7 @@
     -->
 		ip,
 		status,
+		rid,
 		insert_date,
 		udate_date
   </sql>
@@ -190,6 +193,7 @@
     values (
 			#{ip} ,
 			#{status} ,
+			#{rid} ,
 			#{insertDate} ,
 			#{udateDate} 
       )
@@ -208,6 +212,7 @@
 		<if test="id != null" >id</if> ,
 		<if test="ip != null" >ip</if> ,
 		<if test="status != null" >status</if> ,
+		<if test="rid != null" >rid</if> ,
 		<if test="insertDate != null" >insert_date</if> ,
 		<if test="udateDate != null" >udate_date</if> 
     </trim>
@@ -216,6 +221,7 @@
 		<if test="id != null" >#{id}</if>,
 		<if test="ip != null" >#{ip}</if>,
 		<if test="status != null" >#{status}</if>,
+		<if test="rid != null" >#{rid}</if>,
 		<if test="insertDate != null" >#{insertDate}</if>,
 		<if test="udateDate != null" >#{udateDate}</if>
     </trim>
@@ -250,6 +256,9 @@
 			<if test="record.status != null" >
 				status = #{status} ,
 			</if>
+			<if test="record.rid != null" >
+				rid = #{rid} ,
+			</if>
 			<if test="record.insert_date != null" >
 				insert_date = #{insertDate} ,
 			</if>
@@ -274,6 +283,7 @@
     set 
 		ip = #{ip} ,
 		status = #{status} ,
+		rid = #{rid} ,
 		insert_date = #{insertDate} ,
 		udate_date = #{udateDate} 
     <if test="_parameter != null" >
@@ -294,6 +304,9 @@
 		  </if>
 		  <if test="status != null" >
 			status = #{status} ,
+		  </if>
+		  <if test="rid != null" >
+			rid = #{rid} ,
 		  </if>
 		  <if test="insert_date != null" >
 			insert_date = #{insertDate} ,
@@ -319,6 +332,9 @@
 	  </if>
 	  <if test="status != null" >
 		status = #{status} ,
+	  </if>
+	  <if test="rid != null" >
+		rid = #{rid} ,
 	  </if>
 	  <if test="insert_date != null" >
 		insert_date = #{insertDate} ,

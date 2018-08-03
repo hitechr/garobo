@@ -93,13 +93,12 @@ public class BaseService<T extends Serializable, E extends BaseModel> implements
         return list;
     }
 
-    @Override
+
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
 
 
-    @Override
     public void afterPropertiesSet() throws Exception {
         String className = ReflectUtils.getSuperClassGenricType(this.getClass()).getSimpleName();
         className = className.substring(0, 1).toLowerCase() + className.substring(1);

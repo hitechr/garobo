@@ -22,8 +22,6 @@ public class Group implements Serializable {
     
 		private String desc;  
     
-		private Integer runId;  
-    
 		private Integer version;  
     
 		private java.util.Date insertDate;  
@@ -54,14 +52,6 @@ public class Group implements Serializable {
       
     public String getDesc() {  
         return this.desc;  
-    }  
-    
-    public void setRunId(Integer runId) {  
-        this.runId = runId;  
-    }  
-      
-    public Integer getRunId() {  
-        return this.runId;  
     }  
     
     public void setVersion(Integer version) {  

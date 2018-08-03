@@ -22,6 +22,8 @@ public class JobDep implements Serializable {
     
 		private Integer jobId;  
     
+		private Integer groupId;  
+    
 		private Integer status;  
     
 		private java.util.Date insertDate;  
@@ -52,6 +54,14 @@ public class JobDep implements Serializable {
       
     public Integer getJobId() {  
         return this.jobId;  
+    }  
+    
+    public void setGroupId(Integer groupId) {  
+        this.groupId = groupId;  
+    }  
+      
+    public Integer getGroupId() {  
+        return this.groupId;  
     }  
     
     public void setStatus(Integer status) {  
