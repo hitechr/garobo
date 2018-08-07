@@ -20,6 +20,7 @@ public class QuartzUtils {
 
     public static JobBean wrapJob(Job job){
         JobBean jobBean= new JobBean();
+        jobBean.setJobId(job.getId());
         jobBean.setJobName(assemName(job.getId(),job.getName()));
         jobBean.setJobGroup(assemName(JOBGROUP,job.getGroupId()));
         jobBean.setTriggerName(assemName(TRIGGERPRE,job.getId(),job.getName()));

@@ -20,7 +20,7 @@ public class Group implements Serializable {
     
 		private String name;  
     
-		private String desc;  
+		private String comment;  
     
 		private Integer version;  
     
@@ -46,12 +46,12 @@ public class Group implements Serializable {
         return this.name;  
     }  
     
-    public void setDesc(String desc) {  
-        this.desc = desc;  
+    public void setComment(String comment) {  
+        this.comment = comment;  
     }  
       
-    public String getDesc() {  
-        return this.desc;  
+    public String getComment() {  
+        return this.comment;  
     }  
     
     public void setVersion(Integer version) {  

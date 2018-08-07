@@ -7,28 +7,25 @@ package org.hitechr.garobo.console.web;
  * @version V1.0
  */
 
+import org.hitechr.garobo.common.entity.Response;
+import org.hitechr.garobo.common.web.BaseController;
 import org.hitechr.garobo.console.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Descriptions:
  */
-@Controller
-public class Test {
+@RestController
+public class Test extends BaseController {
 
 
     @Autowired
     private JobService jobService;
 
-    @RequestMapping(value = "/test1", method = RequestMethod.GET)
-    @ResponseBody
-    public String test1() {
-
-//        Job job = jobService.selectByPrimaryKey(1);
-        return "spring boot multiple modules test";
+    @PostMapping("/hi")
+    public Response test1() {
+        return successResponse("hello!");
     }
 }

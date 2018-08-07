@@ -12,11 +12,8 @@ package org.hitechr.garobo.exec.common;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.exec.*;
 import org.hitechr.garobo.exec.handler.CommandExecuteResultHandler;
-import org.hitechr.garobo.model.Response;
 
 import java.io.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * @Descriptions:

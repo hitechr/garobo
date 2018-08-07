@@ -11,6 +11,10 @@ import org.hitechr.garobo.console.vo.JobVo;
 import org.quartz.*;
 
 import java.util.Date;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
+import static org.hitechr.garobo.console.scheduler.JobDataKey.JOBBEAN;
 
 /**
  * @Descriptions: job管理，包括添加，暂停，删除
@@ -30,7 +34,11 @@ public class SchedulerManager {
      * @param jobBean
      */
     public void addJob(JobBean jobBean){
-        addJob(jobBean.getJobName(),jobBean.getJobGroup(),jobBean.getTriggerName(),jobBean.getTriggerGroup(),jobBean.getCron());
+
+        addJob(jobBean.getJobName(), jobBean.getJobGroup(), jobBean.getTriggerName(), jobBean.getTriggerGroup(), jobBean.getCron(),jobDetail1->{
+            JobDataMap jobDataMap = jobDetail1.getJobDataMap();
+            jobDataMap.put(JOBBEAN,jobBean);
+        });
     }
 
     /**
@@ -104,8 +112,8 @@ public class SchedulerManager {
     //基础方法==============================================================================
 
     private void addJob(String jobName, String jobGroupName, String triggerName, String triggerGroupName,
-                       String cron){
-        addJob(jobName,jobGroupName,triggerName,triggerGroupName,ExecuteJob.class,cron);
+                       String cron,Consumer<JobDetail> consumer){
+         addJob(jobName,jobGroupName,triggerName,triggerGroupName,JobBeanExecuter.class,cron,consumer);
 
     }
 
@@ -125,12 +133,17 @@ public class SchedulerManager {
      * @param cron
      *            时间设置，参考quartz说明文档
      */
-    private void addJob(String jobName, String jobGroupName, String triggerName, String triggerGroupName, Class jobClass,
-                       String cron) {
+    private void  addJob(String jobName, String jobGroupName, String triggerName, String triggerGroupName, Class jobClass,
+                             String cron, Consumer<JobDetail> consumer) {
+        JobDetail jobDetail=null;
         try {
 
             // 任务名，任务组，任务执行类
-            JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(jobName, jobGroupName).build();
+            jobDetail = JobBuilder.newJob(jobClass).withIdentity(jobName, jobGroupName).build();
+            if(consumer!=null){
+                consumer.accept(jobDetail);
+            }
+
 
             // 触发器
             TriggerBuilder<Trigger> triggerBuilder =   TriggerBuilder.newTrigger();
@@ -159,6 +172,7 @@ public class SchedulerManager {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
     }
 
     /**

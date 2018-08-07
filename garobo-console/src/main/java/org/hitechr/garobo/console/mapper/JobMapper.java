@@ -9,6 +9,7 @@
 package org.hitechr.garobo.console.mapper;
 
 
+import org.apache.ibatis.annotations.Param;
 import org.hitechr.garobo.console.common.web.dao.BaseMapper;
 import org.springframework.stereotype.Repository;
 
@@ -20,4 +21,5 @@ import org.hitechr.garobo.console.model.JobExample;
 public interface JobMapper extends BaseMapper<Job, JobExample> {
 
 
+    int selectMaxFlowNum(@Param("depJobIds") Integer[] depJobIds);
 }

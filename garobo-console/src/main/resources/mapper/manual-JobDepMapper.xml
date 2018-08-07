@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
-"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 
 <!-- 存放手写的sql -->
 <mapper namespace="org.hitechr.garobo.console.mapper.JobDepMapper">
+    
+    <insert id="saveDepRelation">
+
+        INSERT INTO `g_job_dep`(depjob_id,jobId,group_id,`status`)
+        values
+        <foreach collection="depJobIds" item="item" separator=",">
+            (#{item},#{jobId},#{groupId},1)
+        </foreach>
+    </insert>
+
+    <update id="updateJobLastValue">
+        UPDATE `g_job` gj
+        SET gj.`last`=FALSE
+        WHERE gj.`id` IN
+        <foreach collection="depJobIds" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
+
+
 	
 </mapper>

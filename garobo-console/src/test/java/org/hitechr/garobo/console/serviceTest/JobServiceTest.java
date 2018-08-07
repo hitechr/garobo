@@ -7,6 +7,8 @@ package org.hitechr.garobo.console.serviceTest;
  * @version V1.0
  */
 
+import org.hitechr.garobo.console.mapper.JobDepMapper;
+import org.hitechr.garobo.console.mapper.JobMapper;
 import org.hitechr.garobo.console.model.Job;
 import org.hitechr.garobo.console.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,20 @@ public class JobServiceTest extends BaseTest {
 
     @Autowired
     private JobService jobService;
+
+    @Autowired
+    private JobDepMapper jobDepMapper;
+
+
+
+    @Test
+    public void testUpdateLast(){
+
+        Integer[] depJobIds={1,2,3,4};
+        int i = jobDepMapper.updateJobLastValue(depJobIds);
+        System.out.println(i);
+
+    }
 
     @Test
     public void saveJobAndJobExecutorTest(){
@@ -37,7 +53,7 @@ public class JobServiceTest extends BaseTest {
         job.setStatus(1);
         job.setType(1);
         job.setSuccessCode(0);
-        jobService.saveJobAndJobExecutor(job,new Integer[]{1,2});
+        jobService.saveJobAndJobExecutor(job,new Integer[]{1,2},new Integer[]{1,2});
 
     }
 

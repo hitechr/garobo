@@ -38,11 +38,15 @@ public class Job implements Serializable {
     
 		private Integer successCode;  
     
-		private Integer weight;  
+		private Integer weight=0;
     
 		private Integer redo;  
     
 		private Integer redoNow;  
+    
+		private Integer alarmCode;  
+    
+		private Integer timeOut;  
     
 		private java.util.Date insertDate;  
     
@@ -160,6 +164,22 @@ public class Job implements Serializable {
       
     public Integer getRedoNow() {  
         return this.redoNow;  
+    }  
+    
+    public void setAlarmCode(Integer alarmCode) {  
+        this.alarmCode = alarmCode;  
+    }  
+      
+    public Integer getAlarmCode() {  
+        return this.alarmCode;  
+    }  
+    
+    public void setTimeOut(Integer timeOut) {  
+        this.timeOut = timeOut;  
+    }  
+      
+    public Integer getTimeOut() {  
+        return this.timeOut;  
     }  
     
     public void setInsertDate(java.util.Date insertDate) {  

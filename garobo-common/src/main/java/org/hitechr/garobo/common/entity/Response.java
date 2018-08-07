@@ -24,16 +24,18 @@ public class Response {
 
     private String result;
     private int exitValue;
+    @Getter
     private int status;
     private Date startDate;
     private Date endDate;
 
-    public Response() {
+    public Response(Status status) {
+        this.status = status.getCode();
     }
 
-    public Response(String result, int status) {
+    public Response(String result, Status status) {
         this.result = result;
-        this.status = status;
+        this.status = status.getCode();
     }
 
     @Override
@@ -45,5 +47,23 @@ public class Response {
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 '}';
+    }
+
+    public enum Status{
+        SUCCESS(0),
+        FAIL(1),
+        ERROR(2),
+        NULL(3),
+        EXIST(4);
+
+        int code;
+
+        Status(int code) {
+            this.code = code;
+        }
+
+        public int getCode() {
+            return code;
+        }
     }
 }
