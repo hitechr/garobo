@@ -22,7 +22,13 @@ public class Executer implements Serializable {
     
 		private Integer status;  
     
+		private Integer port;  
+    
 		private String rid;  
+    
+		private Integer pid;  
+    
+		private java.util.Date upDate;  
     
 		private java.util.Date insertDate;  
     
@@ -54,12 +60,36 @@ public class Executer implements Serializable {
         return this.status;  
     }  
     
+    public void setPort(Integer port) {  
+        this.port = port;  
+    }  
+      
+    public Integer getPort() {  
+        return this.port;  
+    }  
+    
     public void setRid(String rid) {  
         this.rid = rid;  
     }  
       
     public String getRid() {  
         return this.rid;  
+    }  
+    
+    public void setPid(Integer pid) {  
+        this.pid = pid;  
+    }  
+      
+    public Integer getPid() {  
+        return this.pid;  
+    }  
+    
+    public void setUpDate(java.util.Date upDate) {  
+        this.upDate = upDate;  
+    }  
+      
+    public java.util.Date getUpDate() {  
+        return this.upDate;  
     }  
     
     public void setInsertDate(java.util.Date insertDate) {  
@@ -78,7 +108,8 @@ public class Executer implements Serializable {
         return this.udateDate;  
     }  
 	
-	
+
+
 
 }
 

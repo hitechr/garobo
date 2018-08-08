@@ -17,12 +17,14 @@ import org.hitechr.garobo.console.service.JobService;
 import org.hitechr.garobo.console.vo.JobVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * @Descriptions:
@@ -30,6 +32,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/job")
 @Slf4j
+@Validated
 public class JobController extends BaseController {
 
     @Autowired
@@ -59,7 +62,7 @@ public class JobController extends BaseController {
         //要把作业设置相关的属性值
         job.setLast(true);
 
-        if(jobVo.getDepJobId()!=null && jobVo.getDepJobId().length>0){
+        if(Stream.of(jobVo.getDepJobId()).count()>0){
             int flowNum=jobService.selectMaxFlowNum(jobVo.getDepJobId());
             job.setFlowNum(flowNum+1);
         }
@@ -69,5 +72,8 @@ public class JobController extends BaseController {
 
         return successResponse("保存成功");
     }
+
+
+
 
 }

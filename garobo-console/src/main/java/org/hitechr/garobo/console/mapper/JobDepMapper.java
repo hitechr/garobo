@@ -24,5 +24,4 @@ public interface JobDepMapper extends BaseMapper<JobDep, JobDepExample> {
 
     int updateJobLastValue(@Param("depJobIds")Integer[] depJobIds);
 
-    int selectMaxFlowNum(Integer[] depJobIds);
 }

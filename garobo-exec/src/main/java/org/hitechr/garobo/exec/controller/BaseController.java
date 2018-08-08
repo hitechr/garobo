@@ -7,16 +7,18 @@ package org.hitechr.garobo.exec.controller;
  * @version V1.0
  */
 
+import org.hitechr.garobo.common.entity.Response;
+
 /**
  * @Descriptions:
  */
 public class BaseController {
 
     public Response errorResponse(String msg){
-        return new Response(msg,500);
+        return new Response(msg,Response.Status.ERROR);
     }
     public Response successResponse(String msg){
-        return new Response(msg,200);
+        return new Response(msg,Response.Status.SUCCESS);
     }
 
 }

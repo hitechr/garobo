@@ -9,7 +9,10 @@
 			<result property="id" column="id"/>
 			<result property="ip" column="ip"/>
 			<result property="status" column="status"/>
+			<result property="port" column="port"/>
 			<result property="rid" column="rid"/>
+			<result property="pid" column="pid"/>
+			<result property="upDate" column="up_date"/>
 			<result property="insertDate" column="insert_date"/>
 			<result property="udateDate" column="udate_date"/>
 	</resultMap>
@@ -93,7 +96,10 @@
 		id,
 		ip,
 		status,
+		port,
 		rid,
+		pid,
+		up_date,
 		insert_date,
 		udate_date
   </sql>
@@ -106,7 +112,10 @@
     -->
 		ip,
 		status,
+		port,
 		rid,
+		pid,
+		up_date,
 		insert_date,
 		udate_date
   </sql>
@@ -221,7 +230,10 @@
     values (
 			#{ip} ,
 			#{status} ,
+			#{port} ,
 			#{rid} ,
+			#{pid} ,
+			#{upDate} ,
 			#{insertDate} ,
 			#{udateDate} 
       )
@@ -240,7 +252,10 @@
 		<if test="id != null" >id,</if>
 		<if test="ip != null" >ip,</if>
 		<if test="status != null" >status,</if>
+		<if test="port != null" >port,</if>
 		<if test="rid != null" >rid,</if>
+		<if test="pid != null" >pid,</if>
+		<if test="upDate != null" >up_date,</if>
 		<if test="insertDate != null" >insert_date,</if>
 		<if test="udateDate != null" >udate_date,</if>
     </trim>
@@ -249,7 +264,10 @@
 		<if test="id != null" >#{id},</if>
 		<if test="ip != null" >#{ip},</if>
 		<if test="status != null" >#{status},</if>
+		<if test="port != null" >#{port},</if>
 		<if test="rid != null" >#{rid},</if>
+		<if test="pid != null" >#{pid},</if>
+		<if test="upDate != null" >#{upDate},</if>
 		<if test="insertDate != null" >#{insertDate},</if>
 		<if test="udateDate != null" >#{udateDate},</if>
     </trim>
@@ -284,8 +302,17 @@
 			<if test="record.status != null" >
 				status = #{status} ,
 			</if>
+			<if test="record.port != null" >
+				port = #{port} ,
+			</if>
 			<if test="record.rid != null" >
 				rid = #{rid} ,
+			</if>
+			<if test="record.pid != null" >
+				pid = #{pid} ,
+			</if>
+			<if test="record.up_date != null" >
+				up_date = #{upDate} ,
 			</if>
 			<if test="record.insert_date != null" >
 				insert_date = #{insertDate} ,
@@ -311,7 +338,10 @@
     set 
 		ip = #{ip} ,
 		status = #{status} ,
+		port = #{port} ,
 		rid = #{rid} ,
+		pid = #{pid} ,
+		up_date = #{upDate} ,
 		insert_date = #{insertDate} ,
 		udate_date = #{udateDate} 
     <if test="_parameter != null" >
@@ -333,8 +363,17 @@
 		  <if test="status != null" >
 			status = #{status} ,
 		  </if>
+		  <if test="port != null" >
+			port = #{port} ,
+		  </if>
 		  <if test="rid != null" >
 			rid = #{rid} ,
+		  </if>
+		  <if test="pid != null" >
+			pid = #{pid} ,
+		  </if>
+		  <if test="up_date != null" >
+			up_date = #{upDate} ,
 		  </if>
 		  <if test="insert_date != null" >
 			insert_date = #{insertDate} ,
@@ -361,8 +400,17 @@
 	  <if test="status != null" >
 		status = #{status} ,
 	  </if>
+	  <if test="port != null" >
+		port = #{port} ,
+	  </if>
 	  <if test="rid != null" >
 		rid = #{rid} ,
+	  </if>
+	  <if test="pid != null" >
+		pid = #{pid} ,
+	  </if>
+	  <if test="up_date != null" >
+		up_date = #{upDate} ,
 	  </if>
 	  <if test="insert_date != null" >
 		insert_date = #{insertDate} ,

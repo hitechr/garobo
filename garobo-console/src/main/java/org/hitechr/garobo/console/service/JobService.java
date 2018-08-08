@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.hitechr.garobo.console.model.JobExample;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 @Service
 @Slf4j
@@ -48,9 +49,6 @@ public class JobService extends BaseService<Job, JobExample> {
      */
     public void saveJobAndJobExecutor(Job job, Integer[] execIds, Integer[] depJobIds) {
 
-
-
-
         int count = jobMapper.insertSelective(job);
         log.info("save job:{}, result:{}",job.getName(),count);
 
@@ -59,7 +57,8 @@ public class JobService extends BaseService<Job, JobExample> {
         log.info("job:{} bound execter count:{}",job.getName(),executerCount);
 
         //保存任务的依赖关系记录
-        if(depJobIds!=null && depJobIds.length>0){
+
+        if(Stream.of(depJobIds).count()>0){
             int relationCount=jobDepMapper.saveDepRelation(job.getGroupId(),job.getId(),depJobIds);
             log.info("job:{} save depRelation count:{}",job.getName(),relationCount);
 

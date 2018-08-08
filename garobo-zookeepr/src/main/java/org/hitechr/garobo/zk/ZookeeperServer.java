@@ -136,23 +136,63 @@ public class ZookeeperServer {
      * @param path
      * @param listener
      */
-    public void addPathListener(String path,boolean firstCache,PathCacheListener listener){
+    public void addPathListener(String path,boolean firstCache,final PathCacheListener listener){
         try {
             final NodeCache nodeCache = new NodeCache(client,path);
             nodeCache.start(firstCache);
-          /*  nodeCache.getListenable().addListener(()->listener.changed(nodeCache));*/
+            nodeCache.getListenable().addListener(new NodeCacheListener() {
+                @Override
+                public void nodeChanged() throws Exception {
+                    listener.changed(nodeCache);
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
             ExceptionHandler.handleException(e);
         }
     }
-    public void addPathChildListener(String path,ChildrenCacheListener listener){
+
+    /**
+     * 监听节点的所有李节点
+     * @param path
+     * @param listener
+     */
+    public void addPathAllChildListener(String path,TreeCacheListener  listener){
+        try {
+            TreeCache treeCache= new TreeCache(client,path);
+            treeCache.start();
+            treeCache.getListenable().addListener(listener);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ExceptionHandler.handleException(e);
+        }
+
+    }
+
+    public void addPathChildListener(String path,boolean cacheData,PathChildrenCacheListener listener){
+        try {
+            PathChildrenCache cache = new PathChildrenCache(client, path, cacheData);
+
+            cache.start(PathChildrenCache.StartMode.POST_INITIALIZED_EVENT);
+            cache.getListenable().addListener(listener);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ExceptionHandler.handleException(e);
+        }
+
+    }
+    public void addPathChildListener(String path,final ChildrenCacheListener listener){
 
         try {
             PathChildrenCache cache = new PathChildrenCache(client, path, true);
 
             cache.start(PathChildrenCache.StartMode.POST_INITIALIZED_EVENT);
-           /* cache.getListenable().addListener((client,event)-> listener.change(event));*/
+            cache.getListenable().addListener(new PathChildrenCacheListener() {
+                @Override
+                public void childEvent(CuratorFramework curatorFramework, PathChildrenCacheEvent pathChildrenCacheEvent) throws Exception {
+                    listener.change(pathChildrenCacheEvent);
+                }
+            });
 
         } catch (Exception e) {
             e.printStackTrace();

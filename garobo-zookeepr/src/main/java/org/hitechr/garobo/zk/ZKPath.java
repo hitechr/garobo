@@ -16,7 +16,8 @@ public class ZKPath {
      private static String CONSOLE_PATH="/console/%s";
      private static String CONSOLE_STATUS=CONSOLE_PATH+"/status";//console 状态
 
-     private static String AGENT_PATH  ="/executer/%s";//agent的注册地址
+     private static String EXECUTER  ="/executer";//executer的根目录
+     private static String AGENT_PATH  =EXECUTER+"/%s";//agent的注册地址
      private static String AGENT_STATUS=AGENT_PATH+"/status";//agent 状态
      private static String AGET_JOBS=AGENT_PATH+"/jobs";//添加到这个机器运行的任务
 
@@ -89,6 +90,10 @@ public class ZKPath {
       */
      public static String getJobExecute(String jobId){
           return format(JOB_EXECUTE,jobId);
+     }
+
+     public static String getExecuter(){
+          return format(EXECUTER);
      }
 
 

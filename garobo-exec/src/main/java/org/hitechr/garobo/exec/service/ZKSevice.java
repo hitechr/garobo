@@ -37,7 +37,7 @@ public class ZKSevice {
     public void register(MachineInfo machineInfo) {
         try {
             String ip=machineInfo.getIp();
-            String agentStatusPath = getAgentStatusPath(ip);
+            String agentStatusPath = getAgentPath(ip);
 
             log.info("agenentStatus path:{}",agentStatusPath);
             String agentStatus=zookeeperServer.getData(agentStatusPath);

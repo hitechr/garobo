@@ -7,6 +7,7 @@ package org.hitechr.garobo.exec;
  * @version V1.0
  */
 
+import org.hitechr.garobo.common.MachineInfo;
 import org.hitechr.garobo.exec.service.ZKSevice;
 import org.hitechr.garobo.zk.ZookeeperServer;
 import org.junit.Test;

@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSON;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.hitechr.garobo.common.MachineInfo;
+import org.hitechr.garobo.common.entity.Response;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -35,7 +36,7 @@ public class SecurityHandlerInterceptor extends HandlerInterceptorAdapter {
         String rid = request.getParameter("rid");
 
         if(rid==null || !machineInfo.getRunid().equals(rid)){
-            Response response1= new Response("rid error",500);
+            Response response1= new Response("rid error",Response.Status.ERROR);
             response.getWriter().write(JSON.toJSONString(response1));
             return false;
         }

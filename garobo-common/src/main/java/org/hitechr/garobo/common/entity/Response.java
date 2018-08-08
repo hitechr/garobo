@@ -29,6 +29,7 @@ public class Response {
     private Date startDate;
     private Date endDate;
 
+    public Response(){}
     public Response(Status status) {
         this.status = status.getCode();
     }

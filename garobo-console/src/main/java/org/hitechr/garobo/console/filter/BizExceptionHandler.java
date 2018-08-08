@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.util.Optional;
+
 /**
  * @Descriptions: Controller异常处理类
  */
@@ -27,17 +31,25 @@ public class BizExceptionHandler {
     /**
      * 验证字段是否为空
      * @param e
-     * @return
+     * @returnMissingServletRequestParameterException
      */
     @ExceptionHandler(BindException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Response bindException(BindException e) {
-
         Response response= new Response(Response.Status.ERROR);
         BindingResult bindingResult = e.getBindingResult();
-
         String defaultMessage = bindingResult.getFieldError().getDefaultMessage();
         response.setResult(defaultMessage);
+        return response;
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Response constraintViolationException(ConstraintViolationException exption){
+        Response response= new Response(Response.Status.ERROR);
+         exption.getConstraintViolations().stream().findFirst().ifPresent(e->{
+             response.setResult(e.getMessage());
+         });
         return response;
     }
 
