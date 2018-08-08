@@ -230,7 +230,7 @@
 		select 
 		<include refid="Base_Column_List" />
 		from g_job_record
-		 where id = #{id}
+		where id = #{id}
 	
 
   </select>
@@ -386,31 +386,31 @@
     update g_job_record
     <set>
 		
-			<if test="record.job_name != null" >
+			<if test="record.jobName != null" >
 				job_name = #{jobName} ,
 			</if>
 			<if test="record.runId != null" >
 				runId = #{runId} ,
 			</if>
-			<if test="record.group_id != null" >
+			<if test="record.groupId != null" >
 				group_id = #{groupId} ,
 			</if>
 			<if test="record.pid != null" >
 				pid = #{pid} ,
 			</if>
-			<if test="record.serial_num != null" >
+			<if test="record.serialNum != null" >
 				serial_num = #{serialNum} ,
 			</if>
 			<if test="record.jobId != null" >
 				jobId = #{jobId} ,
 			</if>
-			<if test="record.flow_num != null" >
+			<if test="record.flowNum != null" >
 				flow_num = #{flowNum} ,
 			</if>
 			<if test="record.status != null" >
 				status = #{status} ,
 			</if>
-			<if test="record.exec_id != null" >
+			<if test="record.execId != null" >
 				exec_id = #{execId} ,
 			</if>
 			<if test="record.command != null" >
@@ -425,7 +425,7 @@
 			<if test="record.parentId != null" >
 				parentId = #{parentId} ,
 			</if>
-			<if test="record.redo_count != null" >
+			<if test="record.redoCount != null" >
 				redo_count = #{redoCount} ,
 			</if>
 			<if test="record.trigger != null" >
@@ -443,16 +443,16 @@
 			<if test="record.version != null" >
 				version = #{version} ,
 			</if>
-			<if test="record.start_date != null" >
+			<if test="record.startDate != null" >
 				start_date = #{startDate} ,
 			</if>
-			<if test="record.end_date != null" >
+			<if test="record.endDate != null" >
 				end_date = #{endDate} ,
 			</if>
-			<if test="record.insert_date != null" >
+			<if test="record.insertDate != null" >
 				insert_date = #{insertDate} ,
 			</if>
-			<if test="record.udate_date != null" >
+			<if test="record.udateDate != null" >
 				udate_date = #{udateDate} 
 			</if>
       
@@ -470,33 +470,34 @@
       This element was generated on Tue Apr 21 10:36:00 CST 2015.
     -->
     update g_job_record
-    set 
-		job_name = #{jobName} ,
-		runId = #{runId} ,
-		group_id = #{groupId} ,
-		pid = #{pid} ,
-		serial_num = #{serialNum} ,
-		jobId = #{jobId} ,
-		flow_num = #{flowNum} ,
-		status = #{status} ,
-		exec_id = #{execId} ,
-		command = #{command} ,
-		returnCode = #{returnCode} ,
-		message = #{message} ,
-		parentId = #{parentId} ,
-		redo_count = #{redoCount} ,
-		trigger = #{trigger} ,
-		execType = #{execType} ,
-		execUser = #{execUser} ,
-		weight = #{weight} ,
-		version = #{version} ,
-		start_date = #{startDate} ,
-		end_date = #{endDate} ,
-		insert_date = #{insertDate} ,
-		udate_date = #{udateDate} 
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
+    <set> 
+			job_name = #{jobName} ,
+			runId = #{runId} ,
+			group_id = #{groupId} ,
+			pid = #{pid} ,
+			serial_num = #{serialNum} ,
+			jobId = #{jobId} ,
+			flow_num = #{flowNum} ,
+			status = #{status} ,
+			exec_id = #{execId} ,
+			command = #{command} ,
+			returnCode = #{returnCode} ,
+			message = #{message} ,
+			parentId = #{parentId} ,
+			redo_count = #{redoCount} ,
+			trigger = #{trigger} ,
+			execType = #{execType} ,
+			execUser = #{execUser} ,
+			weight = #{weight} ,
+			version = #{version} ,
+			start_date = #{startDate} ,
+			end_date = #{endDate} ,
+			insert_date = #{insertDate} ,
+			udate_date = #{udateDate} 
+	</set>
+		<if test="_parameter != null" >
+		  <include refid="Update_By_Example_Where_Clause" />
+		</if>
   </update>
   
   <update id="updateByPrimaryKeySelective" parameterType="org.hitechr.garobo.console.model.JobRecord" >
@@ -506,32 +507,32 @@
       This element was generated on Tue Apr 21 10:36:00 CST 2015.
     -->
     update g_job_record
-    <set >
-		  <if test="job_name != null" >
+    <set>
+		  <if test="jobName != null" >
 			job_name = #{jobName} ,
 		  </if>
 		  <if test="runId != null" >
 			runId = #{runId} ,
 		  </if>
-		  <if test="group_id != null" >
+		  <if test="groupId != null" >
 			group_id = #{groupId} ,
 		  </if>
 		  <if test="pid != null" >
 			pid = #{pid} ,
 		  </if>
-		  <if test="serial_num != null" >
+		  <if test="serialNum != null" >
 			serial_num = #{serialNum} ,
 		  </if>
 		  <if test="jobId != null" >
 			jobId = #{jobId} ,
 		  </if>
-		  <if test="flow_num != null" >
+		  <if test="flowNum != null" >
 			flow_num = #{flowNum} ,
 		  </if>
 		  <if test="status != null" >
 			status = #{status} ,
 		  </if>
-		  <if test="exec_id != null" >
+		  <if test="execId != null" >
 			exec_id = #{execId} ,
 		  </if>
 		  <if test="command != null" >
@@ -546,7 +547,7 @@
 		  <if test="parentId != null" >
 			parentId = #{parentId} ,
 		  </if>
-		  <if test="redo_count != null" >
+		  <if test="redoCount != null" >
 			redo_count = #{redoCount} ,
 		  </if>
 		  <if test="trigger != null" >
@@ -564,16 +565,16 @@
 		  <if test="version != null" >
 			version = #{version} ,
 		  </if>
-		  <if test="start_date != null" >
+		  <if test="startDate != null" >
 			start_date = #{startDate} ,
 		  </if>
-		  <if test="end_date != null" >
+		  <if test="endDate != null" >
 			end_date = #{endDate} ,
 		  </if>
-		  <if test="insert_date != null" >
+		  <if test="insertDate != null" >
 			insert_date = #{insertDate} ,
 		  </if>
-		  <if test="udate_date != null" >
+		  <if test="udateDate != null" >
 			udate_date = #{udateDate} 
 		  </if>
     </set>
@@ -588,77 +589,78 @@
       This element was generated on Tue Apr 21 10:36:00 CST 2015.
     -->
     update g_job_record
-    set 
-	  <if test="job_name != null" >
-		job_name = #{jobName} ,
-	  </if>
-	  <if test="runId != null" >
-		runId = #{runId} ,
-	  </if>
-	  <if test="group_id != null" >
-		group_id = #{groupId} ,
-	  </if>
-	  <if test="pid != null" >
-		pid = #{pid} ,
-	  </if>
-	  <if test="serial_num != null" >
-		serial_num = #{serialNum} ,
-	  </if>
-	  <if test="jobId != null" >
-		jobId = #{jobId} ,
-	  </if>
-	  <if test="flow_num != null" >
-		flow_num = #{flowNum} ,
-	  </if>
-	  <if test="status != null" >
-		status = #{status} ,
-	  </if>
-	  <if test="exec_id != null" >
-		exec_id = #{execId} ,
-	  </if>
-	  <if test="command != null" >
-		command = #{command} ,
-	  </if>
-	  <if test="returnCode != null" >
-		returnCode = #{returnCode} ,
-	  </if>
-	  <if test="message != null" >
-		message = #{message} ,
-	  </if>
-	  <if test="parentId != null" >
-		parentId = #{parentId} ,
-	  </if>
-	  <if test="redo_count != null" >
-		redo_count = #{redoCount} ,
-	  </if>
-	  <if test="trigger != null" >
-		trigger = #{trigger} ,
-	  </if>
-	  <if test="execType != null" >
-		execType = #{execType} ,
-	  </if>
-	  <if test="execUser != null" >
-		execUser = #{execUser} ,
-	  </if>
-	  <if test="weight != null" >
-		weight = #{weight} ,
-	  </if>
-	  <if test="version != null" >
-		version = #{version} ,
-	  </if>
-	  <if test="start_date != null" >
-		start_date = #{startDate} ,
-	  </if>
-	  <if test="end_date != null" >
-		end_date = #{endDate} ,
-	  </if>
-	  <if test="insert_date != null" >
-		insert_date = #{insertDate} ,
-	  </if>
-	  <if test="udate_date != null" >
-		udate_date = #{udateDate} 
-	  </if>
-		 where id = #{id} 
+    <set >
+		  <if test="jobName != null" >
+			job_name = #{jobName} ,
+		  </if>
+		  <if test="runId != null" >
+			runId = #{runId} ,
+		  </if>
+		  <if test="groupId != null" >
+			group_id = #{groupId} ,
+		  </if>
+		  <if test="pid != null" >
+			pid = #{pid} ,
+		  </if>
+		  <if test="serialNum != null" >
+			serial_num = #{serialNum} ,
+		  </if>
+		  <if test="jobId != null" >
+			jobId = #{jobId} ,
+		  </if>
+		  <if test="flowNum != null" >
+			flow_num = #{flowNum} ,
+		  </if>
+		  <if test="status != null" >
+			status = #{status} ,
+		  </if>
+		  <if test="execId != null" >
+			exec_id = #{execId} ,
+		  </if>
+		  <if test="command != null" >
+			command = #{command} ,
+		  </if>
+		  <if test="returnCode != null" >
+			returnCode = #{returnCode} ,
+		  </if>
+		  <if test="message != null" >
+			message = #{message} ,
+		  </if>
+		  <if test="parentId != null" >
+			parentId = #{parentId} ,
+		  </if>
+		  <if test="redoCount != null" >
+			redo_count = #{redoCount} ,
+		  </if>
+		  <if test="trigger != null" >
+			trigger = #{trigger} ,
+		  </if>
+		  <if test="execType != null" >
+			execType = #{execType} ,
+		  </if>
+		  <if test="execUser != null" >
+			execUser = #{execUser} ,
+		  </if>
+		  <if test="weight != null" >
+			weight = #{weight} ,
+		  </if>
+		  <if test="version != null" >
+			version = #{version} ,
+		  </if>
+		  <if test="startDate != null" >
+			start_date = #{startDate} ,
+		  </if>
+		  <if test="endDate != null" >
+			end_date = #{endDate} ,
+		  </if>
+		  <if test="insertDate != null" >
+			insert_date = #{insertDate} ,
+		  </if>
+		  <if test="udateDate != null" >
+			udate_date = #{udateDate} 
+		  </if>
+	</set>
+	where id = #{id}
   </update>
 </mapper>
 

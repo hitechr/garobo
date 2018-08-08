@@ -179,7 +179,7 @@
 		select 
 		<include refid="Base_Column_List" />
 		from g_job_executer
-		 where id = #{id}
+		where id = #{id}
 	
 
   </select>
@@ -284,22 +284,22 @@
     update g_job_executer
     <set>
 		
-			<if test="record.exec_id != null" >
+			<if test="record.execId != null" >
 				exec_id = #{execId} ,
 			</if>
-			<if test="record.job_id != null" >
+			<if test="record.jobId != null" >
 				job_id = #{jobId} ,
 			</if>
-			<if test="record.group_id != null" >
+			<if test="record.groupId != null" >
 				group_id = #{groupId} ,
 			</if>
 			<if test="record.status != null" >
 				status = #{status} ,
 			</if>
-			<if test="record.insert_date != null" >
+			<if test="record.insertDate != null" >
 				insert_date = #{insertDate} ,
 			</if>
-			<if test="record.udate_date != null" >
+			<if test="record.udateDate != null" >
 				udate_date = #{udateDate} 
 			</if>
       
@@ -317,16 +317,17 @@
       This element was generated on Tue Apr 21 10:36:00 CST 2015.
     -->
     update g_job_executer
-    set 
-		exec_id = #{execId} ,
-		job_id = #{jobId} ,
-		group_id = #{groupId} ,
-		status = #{status} ,
-		insert_date = #{insertDate} ,
-		udate_date = #{udateDate} 
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
+    <set> 
+			exec_id = #{execId} ,
+			job_id = #{jobId} ,
+			group_id = #{groupId} ,
+			status = #{status} ,
+			insert_date = #{insertDate} ,
+			udate_date = #{udateDate} 
+	</set>
+		<if test="_parameter != null" >
+		  <include refid="Update_By_Example_Where_Clause" />
+		</if>
   </update>
   
   <update id="updateByPrimaryKeySelective" parameterType="org.hitechr.garobo.console.model.JobExecuter" >
@@ -336,23 +337,23 @@
       This element was generated on Tue Apr 21 10:36:00 CST 2015.
     -->
     update g_job_executer
-    <set >
-		  <if test="exec_id != null" >
+    <set>
+		  <if test="execId != null" >
 			exec_id = #{execId} ,
 		  </if>
-		  <if test="job_id != null" >
+		  <if test="jobId != null" >
 			job_id = #{jobId} ,
 		  </if>
-		  <if test="group_id != null" >
+		  <if test="groupId != null" >
 			group_id = #{groupId} ,
 		  </if>
 		  <if test="status != null" >
 			status = #{status} ,
 		  </if>
-		  <if test="insert_date != null" >
+		  <if test="insertDate != null" >
 			insert_date = #{insertDate} ,
 		  </if>
-		  <if test="udate_date != null" >
+		  <if test="udateDate != null" >
 			udate_date = #{udateDate} 
 		  </if>
     </set>
@@ -367,26 +368,27 @@
       This element was generated on Tue Apr 21 10:36:00 CST 2015.
     -->
     update g_job_executer
-    set 
-	  <if test="exec_id != null" >
-		exec_id = #{execId} ,
-	  </if>
-	  <if test="job_id != null" >
-		job_id = #{jobId} ,
-	  </if>
-	  <if test="group_id != null" >
-		group_id = #{groupId} ,
-	  </if>
-	  <if test="status != null" >
-		status = #{status} ,
-	  </if>
-	  <if test="insert_date != null" >
-		insert_date = #{insertDate} ,
-	  </if>
-	  <if test="udate_date != null" >
-		udate_date = #{udateDate} 
-	  </if>
-		 where id = #{id} 
+    <set >
+		  <if test="execId != null" >
+			exec_id = #{execId} ,
+		  </if>
+		  <if test="jobId != null" >
+			job_id = #{jobId} ,
+		  </if>
+		  <if test="groupId != null" >
+			group_id = #{groupId} ,
+		  </if>
+		  <if test="status != null" >
+			status = #{status} ,
+		  </if>
+		  <if test="insertDate != null" >
+			insert_date = #{insertDate} ,
+		  </if>
+		  <if test="udateDate != null" >
+			udate_date = #{udateDate} 
+		  </if>
+	</set>
+	where id = #{id}
   </update>
 </mapper>
 
