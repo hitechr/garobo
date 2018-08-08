@@ -5,5 +5,11 @@
 
 <!-- 存放手写的sql -->
 <mapper namespace="org.hitechr.garobo.console.mapper.ExecuterMapper">
-	
+
+
+    <update id="clearExecuter" parameterType="map" >
+        UPDATE g_executer g
+        SET g.status=0,g.port=NULL,g.rid=NULL,g.pid=NULL,g.up_date=NULL
+        WHERE g.id=#{id}
+    </update>
 </mapper>

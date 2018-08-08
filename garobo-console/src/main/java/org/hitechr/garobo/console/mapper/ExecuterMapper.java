@@ -18,5 +18,9 @@ import org.hitechr.garobo.console.model.ExecuterExample;
 
 @Repository
 public interface ExecuterMapper extends BaseMapper<Executer, ExecuterExample> {
-	
+
+
+    int clearExecuter(Executer executer);
+
+
 }

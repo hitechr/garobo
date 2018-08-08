@@ -39,18 +39,7 @@ public class ZKSevice {
             String ip=machineInfo.getIp();
             String agentStatusPath = getAgentPath(ip);
 
-            log.info("agenentStatus path:{}",agentStatusPath);
-            String agentStatus=zookeeperServer.getData(agentStatusPath);
-            log.info("agenent path:{} status:{}",agentStatusPath,agentStatus);
-
-            if(agentStatus==null){
-                //首先创建一个status的临时目录节点
-                String macJson = JSONObject.toJSONString(machineInfo);
-                zookeeperServer.createPath(agentStatusPath, macJson);
-
-//                String agentJobsPath = getAgentJobsPath(ip);
-//                zookeeperServer.createPathPer(agentJobsPath,"");
-            }
+            zookeeperServer.register(agentStatusPath,machineInfo);
 
         } catch (Exception e) {
             e.printStackTrace();

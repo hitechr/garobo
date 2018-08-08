@@ -40,18 +40,11 @@ public class ZKSevice {
 
 
     public void register(MachineInfo machineInfo) {
+
         try {
             String ip=machineInfo.getIp();
-
-            String consoleStatusPath=getConsoleStatusPath(ip);
-
-            String consoleStatus=zookeeperServer.getData(consoleStatusPath);
-            log.info("console path:{} status:{}",consoleStatusPath,consoleStatus);
-            if(consoleStatus==null){
-                //首先创建一个status的临时目录节点
-                String macJson = JSONObject.toJSONString(machineInfo);
-                zookeeperServer.createPath(consoleStatusPath, macJson);
-            }
+            String consolePath = ZKPath.getConsolePath(ip);
+            zookeeperServer.register(consolePath,machineInfo);
         } catch (Exception e) {
             e.printStackTrace();
         }

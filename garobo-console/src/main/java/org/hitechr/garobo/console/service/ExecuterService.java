@@ -30,20 +30,43 @@ public class ExecuterService extends BaseService<Executer, ExecuterExample> {
 
     public void updateExecuterInfo(Executer executer) {
         String ip = executer.getIp();
+
+        Optional<Executer> opExecuter = selectExecuterByIp(ip);
+
+        if(opExecuter.isPresent()){
+            Executer dbExecuter = opExecuter.get();
+            Integer id = dbExecuter.getId();
+            if(dbExecuter.getStatus()==1){//如果在线状态 下作处理
+                return;
+            }
+            executer.setId(id);
+            if(executer.getStatus()==0){//下线
+                log.info("executer ip:{} down!",executer.getIp());
+                executerMapper.clearExecuter(executer);
+            }else{//上线
+                log.info("executer ip:{} up!",executer.getIp());
+                executerMapper.updateByPrimaryKeySelective(executer);
+            }
+        }else{
+            executerMapper.insertSelective(executer);
+            log.info("insert executer:{},ip:{} up!",executer.getId(),executer.getIp());
+        }
+    }
+
+
+    /**
+     * 根据IP查找执行器
+     * @param ip
+     * @return
+     */
+    public Optional<Executer> selectExecuterByIp(String ip){
         ExecuterExample executerExample= new ExecuterExample();
         executerExample.createCriteria()
                 .andIpEqualTo(ip);
 
         Executer dbExecuter = executerMapper.getByExample(executerExample);
-        Optional<Executer> opExecuter = Optional.ofNullable(dbExecuter);
-        if(opExecuter.isPresent()){
-            Integer id = dbExecuter.getId();
-            executer.setId(id);
-            executerMapper.updateByPrimaryKey(executer);
-        }else{
-            executerMapper.insertSelective(executer);
-            log.info("insert executer:{},ip:{}",executer.getId(),executer.getIp());
-        }
-
+        return Optional.ofNullable(dbExecuter);
     }
+
+
 }

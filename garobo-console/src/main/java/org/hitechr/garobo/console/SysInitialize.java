@@ -50,23 +50,25 @@ public class SysInitialize extends WebMvcConfigurerAdapter implements Initializi
     public void afterPropertiesSet() throws Exception {
         initConsole();
 
-        //加载当前运行中的客户端信息
-        loadExecutorMachine();
+        //监听客户端信息
+        monitorExecutorMachine();
 
         //初始化执行Job
         initExecuteJob();
 
     }
 
-    private void loadExecutorMachine() {
+    private void monitorExecutorMachine() {
         String path=ZKPath.getExecuter();
 
         zkSevice.bindExecutorListener(path,cacheEvent -> {
             ChildData currentData = cacheEvent.getData();
             log.info("path:{} data:{}",path,currentData);
             Executer executer= new Executer();
-            String execIp = currentData.getPath().replace(path,"").replace("/status","").replace("/","");
-            executer.setIp(execIp);
+            if(currentData!=null){
+                String execIp = currentData.getPath().replace(path,"").replace("/status","").replace("/","");
+                executer.setIp(execIp);
+            }
 
             PathChildrenCacheEvent.Type type = cacheEvent.getType();
             switch (type){
@@ -80,6 +82,7 @@ public class SysInitialize extends WebMvcConfigurerAdapter implements Initializi
                     executer.setUpDate(execMachineInfo.getStartDate());
                     executer.setPort(execMachineInfo.getPort());
                     executer.setStatus(1);//运行中
+                    executer.setPid(execMachineInfo.getPid());
                     executerService.updateExecuterInfo(executer);
                     break;
                 }
@@ -95,11 +98,6 @@ public class SysInitialize extends WebMvcConfigurerAdapter implements Initializi
                     System.out.println(type);
                 }
             }
-
-
-
-
-            executerService.updateExecuterInfo(executer);
         });
 
 

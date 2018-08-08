@@ -13,7 +13,8 @@ package org.hitechr.garobo.zk;
 public class ZKPath {
 
 
-     private static String CONSOLE_PATH="/console/%s";
+     private static String CONSOLE="/console";
+     private static String CONSOLE_PATH=CONSOLE+"/%s";
      private static String CONSOLE_STATUS=CONSOLE_PATH+"/status";//console 状态
 
      private static String EXECUTER  ="/executer";//executer的根目录
@@ -61,6 +62,13 @@ public class ZKPath {
           return format(AGENT_STATUS,ip);
      }
 
+     public static String getConsole(){
+          return CONSOLE;
+     }
+
+     public static String getConsolePath(String ip){
+          return format(CONSOLE_PATH,ip);
+     }
      public static String getConsoleStatusPath(String ip){
           return format(CONSOLE_STATUS,ip);
      }
@@ -93,7 +101,7 @@ public class ZKPath {
      }
 
      public static String getExecuter(){
-          return format(EXECUTER);
+          return EXECUTER;
      }
 
 

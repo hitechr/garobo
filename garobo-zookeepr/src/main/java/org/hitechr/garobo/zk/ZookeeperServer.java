@@ -7,6 +7,7 @@ package org.hitechr.garobo.zk;
  * @version V1.0
  */
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
@@ -33,6 +34,18 @@ public class ZookeeperServer {
     }
 
     private CuratorFramework client;
+
+
+    public void register(String path,Object info) {
+        String status=getData(path);
+        log.info(" path:{} status:{}",path,status);
+        if(status==null){
+            //首先创建一个status的临时目录节点
+
+            String macJson = JSONObject.toJSONString(info);
+            createPath(path, macJson);
+        }
+    }
 
 
     /**
