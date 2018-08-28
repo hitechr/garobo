@@ -47,9 +47,7 @@ public class BizExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Response constraintViolationException(ConstraintViolationException exption){
         Response response= new Response(Response.Status.ERROR);
-         exption.getConstraintViolations().stream().findFirst().ifPresent(e->{
-             response.setResult(e.getMessage());
-         });
+         exption.getConstraintViolations().stream().findFirst().ifPresent(e->response.setResult(e.getMessage()));
         return response;
     }
 
